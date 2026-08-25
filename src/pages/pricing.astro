@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const plans = [
+  {
+    name: "Free",
+    price: "$0",
+    cadence: "",
+    description: "For trying VariantLens on a live product.",
+    features: [
+      "One active storefront product at a time",
+    ],
+    action: "Start free",
+    featured: false,
+  },
+  {
+    name: "Standard",
+    price: "$4.99",
+    cadence: "/ month",
+    description: "For using VariantLens across your catalogue.",
+    features: [
+      "Use VariantLens across your catalogue",
+    ],
+    action: "Upgrade to Standard",
+    featured: true,
+  },
+];
+---
+<BaseLayout
+  title="VariantLens pricing — Free and Standard plans"
+  description="Try VariantLens free on one active Shopify product, or use the Standard plan across your catalogue for $4.99 per month."
+>
+  <header class="pricing-hero">
+    <div class="shell pricing-heading">
+      <p class="eyebrow">Straightforward pricing</p>
+      <h1>Try VariantLens on one product.<br />Upgrade when you need more.</h1>
+      <p>Try VariantLens on one live product before upgrading.</p>
+    </div>
+  </header>
+
+  <section class="pricing-section" aria-label="VariantLens plans">
+    <div class="shell pricing-plans">
+      {plans.map((plan) => (
+        <article class:list={["pricing-plan", { "pricing-plan--featured": plan.featured }]}>
+          <div class="pricing-plan__intro">
+            <p class="pricing-plan__name">{plan.name}</p>
+            <h2 class="pricing-plan__price">
+              <span>{plan.price}</span>
+              {plan.cadence && <small>{plan.cadence}</small>}
+            </h2>
+            <p class="pricing-plan__description">{plan.description}</p>
+          </div>
+
+          <ul class="pricing-plan__features">
+            {plan.features.map((feature) => <li>{feature}</li>)}
+          </ul>
+
+          <a
+            class:list={["pricing-plan__button", { "pricing-plan__button--featured": plan.featured }]}
+            href="https://apps.shopify.com/variantlens"
+            aria-label={`${plan.action} on the Shopify App Store`}
+          >
+            {plan.action}
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

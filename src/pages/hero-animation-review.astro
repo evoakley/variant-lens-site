@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroAnimated from "../components/HeroAnimated.astro";
+---
+<BaseLayout
+  title="Animated hero review | VariantLens"
+  description="Experimental VariantLens hero animation review."
+  robots="noindex, nofollow"
+>
+  <HeroAnimated/>
+  <aside class="review-status" aria-label="Experiment status">
+    <div class="shell">
+      <p><strong>Animation experiment.</strong> The homepage still uses the static hero.</p>
+      <a href="/">Compare with the current homepage →</a>
+    </div>
+  </aside>
+</BaseLayout>
+
+<style>
+  .review-status { padding: 24px 0; background: #fff; border-bottom: 1px solid var(--line); }
+  .review-status .shell { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .review-status p { margin: 0; color: var(--muted); }
+  .review-status a { white-space: nowrap; }
+  @media (max-width: 640px) {
+    .review-status .shell { align-items: flex-start; flex-direction: column; gap: 10px; }
+  }
+</style>

@@ -1,0 +1,296 @@
+---
+const layerRoot = "/assets/hero-layers";
+const layers = {
+  base: `${layerRoot}/hero-base.png`,
+  leftLarge: `${layerRoot}/card-facing-right-large.png`,
+  leftMedium: `${layerRoot}/card-facing-right-medium.png`,
+  leftSmall: `${layerRoot}/card-facing-right-small.png`,
+  rightLarge: `${layerRoot}/card-facing-left-large.png`,
+  rightSmall: `${layerRoot}/card-facing-left-grid.png`,
+};
+---
+<section class="animated-hero" aria-labelledby="animated-hero-title">
+  <img class="animated-hero__base" src={layers.base} alt="" width="1751" height="898" aria-hidden="true"/>
+  <div class="animated-hero__visuals" aria-hidden="true">
+    <span class="hero-particle hero-particle--star particle--left-one particle--path-a"></span>
+    <span class="hero-particle hero-particle--star particle--left-two particle--path-b"></span>
+    <span class="hero-particle hero-particle--star particle--left-three particle--path-c particle--tablet-hide"></span>
+    <span class="hero-particle hero-particle--star particle--left-four particle--path-a particle--mobile-hide"></span>
+    <span class="hero-particle hero-particle--star particle--left-bottom-one particle--path-c"></span>
+    <span class="hero-particle hero-particle--star particle--left-bottom-two particle--path-b particle--mobile-hide"></span>
+    <span class="hero-particle hero-particle--star particle--left-bottom-three particle--path-a particle--tablet-hide"></span>
+    <span class="hero-particle hero-particle--star particle--right-one particle--path-b"></span>
+    <span class="hero-particle hero-particle--star particle--right-two particle--path-a"></span>
+    <span class="hero-particle hero-particle--star particle--right-three particle--path-c particle--tablet-hide"></span>
+    <span class="hero-particle hero-particle--star particle--right-four particle--path-b particle--mobile-hide"></span>
+    <span class="hero-particle hero-particle--star particle--right-bottom-one particle--path-a"></span>
+    <span class="hero-particle hero-particle--star particle--right-bottom-two particle--path-c particle--mobile-hide"></span>
+    <span class="hero-particle hero-particle--star particle--right-bottom-three particle--path-b particle--tablet-hide"></span>
+    <img class="floating-layer floating-layer--left-back" src={layers.leftMedium} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--left-large" src={layers.leftLarge} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--left-medium" src={layers.leftMedium} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--left-small" src={layers.leftSmall} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--right-back" src={layers.rightSmall} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--right-large" src={layers.rightLarge} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--right-small" src={layers.rightSmall} alt="" width="1254" height="1254"/>
+  </div>
+  <div class="animated-hero__content">
+    <img class="animated-hero__logo" src="/assets/brand/variantlens-mark.png" alt="VariantLens" width="1200" height="1200"/>
+    <h1 id="animated-hero-title">Show the right images<br/>for every variant.</h1>
+    <p>Choose which product images belong to each variant.<br class="animated-hero__copy-break"/> Shoppers only see the images relevant to their selection.</p>
+    <div class="actions">
+      <a class="button" href="https://apps.shopify.com/variantlens">Install on Shopify</a>
+      <a class="button secondary" href="/#how-it-works">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .animated-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 670px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: #f7f5ff;
+  }
+
+  .animated-hero__base,
+  .animated-hero__visuals {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .animated-hero__base {
+    z-index: -2;
+    object-fit: cover;
+  }
+
+  .animated-hero__visuals { z-index: -1; }
+
+  .floating-layer {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+    opacity: var(--opacity-high, 1);
+    will-change: transform;
+  }
+
+  .hero-particle {
+    position: absolute;
+    z-index: 5;
+    display: block;
+    width: var(--particle-size);
+    height: var(--particle-size);
+    max-width: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .hero-particle--star { background-image: url('/assets/hero-layers/particle-star.png'); }
+
+  .particle--path-a { animation: particle-path-a 6.2s ease-in-out infinite; }
+  .particle--path-b { animation: particle-path-b 7.4s ease-in-out infinite; }
+  .particle--path-c { animation: particle-path-c 5.3s ease-in-out infinite; }
+
+  .particle--left-one { --particle-size: 32px; left: 4%; top: 12%; animation-delay: -1.2s; }
+  .particle--left-two { --particle-size: 25px; left: 12%; top: 24%; animation-delay: -4.1s; }
+  .particle--left-three { --particle-size: 38px; left: 3%; top: 43%; animation-delay: -2.6s; }
+  .particle--left-four { --particle-size: 22px; left: 19%; top: 55%; animation-delay: -5.2s; }
+  .particle--left-bottom-one { --particle-size: 30px; left: 6%; bottom: 8%; animation-delay: -3.4s; }
+  .particle--left-bottom-two { --particle-size: 40px; left: 14%; bottom: 17%; animation-delay: -.7s; }
+  .particle--left-bottom-three { --particle-size: 23px; left: 22%; bottom: 6%; animation-delay: -4.8s; }
+
+  .particle--right-one { --particle-size: 28px; right: 5%; top: 13%; animation-delay: -2.1s; }
+  .particle--right-two { --particle-size: 36px; right: 13%; top: 27%; animation-delay: -5.5s; }
+  .particle--right-three { --particle-size: 24px; right: 3%; top: 45%; animation-delay: -1.6s; }
+  .particle--right-four { --particle-size: 34px; right: 20%; top: 57%; animation-delay: -3.8s; }
+  .particle--right-bottom-one { --particle-size: 39px; right: 6%; bottom: 8%; animation-delay: -4.4s; }
+  .particle--right-bottom-two { --particle-size: 27px; right: 15%; bottom: 19%; animation-delay: -2.9s; }
+  .particle--right-bottom-three { --particle-size: 21px; right: 23%; bottom: 5%; animation-delay: -.9s; }
+
+  .floating-layer--left-large {
+    z-index: 2;
+    width: clamp(235px, 27vw, 440px);
+    left: -8%;
+    top: 15%;
+    --opacity-low: .88;
+    --opacity-high: .98;
+    animation: drift-a 16s -7s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--left-back {
+    z-index: 1;
+    width: clamp(210px, 24vw, 390px);
+    left: -3%;
+    top: 4%;
+    --opacity-low: .34;
+    --opacity-high: .5;
+    animation: drift-back-left 19s -11s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--left-medium {
+    z-index: 3;
+    width: clamp(130px, 14vw, 220px);
+    left: 11%;
+    bottom: -7%;
+    --opacity-low: .7;
+    --opacity-high: .84;
+    animation: drift-b 13s -4s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--left-small {
+    z-index: 4;
+    width: clamp(82px, 8vw, 128px);
+    left: 2%;
+    top: -5%;
+    --opacity-low: .6;
+    --opacity-high: .74;
+    animation: drift-c 18s -12s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--right-large {
+    z-index: 2;
+    width: clamp(260px, 29vw, 480px);
+    right: -8%;
+    top: 23%;
+    --opacity-low: .88;
+    --opacity-high: .98;
+    animation: drift-d 17s -9s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--right-back {
+    z-index: 1;
+    width: clamp(230px, 25vw, 410px);
+    right: -2%;
+    top: 10%;
+    --opacity-low: .24;
+    --opacity-high: .38;
+    animation: drift-back-right 21s -8s ease-in-out infinite alternate;
+  }
+
+  .floating-layer--right-small {
+    z-index: 3;
+    width: clamp(95px, 10vw, 154px);
+    right: 12%;
+    bottom: 1%;
+    --opacity-low: .64;
+    --opacity-high: .78;
+    animation: drift-f 12s -6s ease-in-out infinite alternate;
+  }
+
+  .animated-hero__content {
+    position: relative;
+    z-index: 2;
+    width: min(820px, calc(100% - 40px));
+    padding: 82px 0;
+  }
+
+  .animated-hero__logo {
+    display: block;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    object-fit: contain;
+  }
+
+  .animated-hero h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -.06em;
+  }
+
+  .animated-hero p {
+    max-width: 700px;
+    margin: 24px auto 32px;
+    color: #4d4f59;
+    font-size: clamp(.98rem, 1.6vw, 1.14rem);
+  }
+
+  @keyframes drift-a {
+    from { transform: translate3d(-12px, 12px, 0) rotate(-.45deg); opacity: var(--opacity-low); }
+    to { transform: translate3d(18px, -16px, 0) rotate(.55deg); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-b {
+    from { transform: translate3d(8px, 14px, 0); opacity: var(--opacity-low); }
+    to { transform: translate3d(-15px, -13px, 0); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-c {
+    from { transform: translate3d(-9px, -8px, 0) scale(.985); opacity: var(--opacity-low); }
+    to { transform: translate3d(14px, 15px, 0) scale(1.015); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-d {
+    from { transform: translate3d(13px, -12px, 0) rotate(.4deg); opacity: var(--opacity-low); }
+    to { transform: translate3d(-18px, 16px, 0) rotate(-.5deg); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-f {
+    from { transform: translate3d(9px, 13px, 0) scale(.99); opacity: var(--opacity-low); }
+    to { transform: translate3d(-14px, -12px, 0) scale(1.018); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-back-left {
+    from { transform: translate3d(-8px, -10px, 0) scale(.985); opacity: var(--opacity-low); }
+    to { transform: translate3d(14px, 12px, 0) scale(1.01); opacity: var(--opacity-high); }
+  }
+  @keyframes drift-back-right {
+    from { transform: translate3d(10px, 11px, 0) scale(1.01); opacity: var(--opacity-low); }
+    to { transform: translate3d(-15px, -12px, 0) scale(.99); opacity: var(--opacity-high); }
+  }
+  @keyframes particle-path-a {
+    0%, 100% { transform: translate3d(-12px, 9px, 0) rotate(-8deg) scale(.82); opacity: 0; }
+    12% { opacity: .72; }
+    42% { transform: translate3d(4px, -8px, 0) rotate(2deg) scale(1); opacity: .48; }
+    68% { transform: translate3d(18px, -18px, 0) rotate(9deg) scale(1.08); opacity: .82; }
+    90% { opacity: 0; }
+  }
+  @keyframes particle-path-b {
+    0%, 100% { transform: translate3d(11px, 13px, 0) rotate(7deg) scale(.9); opacity: 0; }
+    14% { opacity: .68; }
+    46% { transform: translate3d(-5px, -4px, 0) rotate(-2deg) scale(1.04); opacity: .42; }
+    70% { transform: translate3d(-19px, -17px, 0) rotate(-10deg) scale(.96); opacity: .78; }
+    91% { opacity: 0; }
+  }
+  @keyframes particle-path-c {
+    0%, 100% { transform: translate3d(-7px, 17px, 0) rotate(-5deg) scale(.86); opacity: 0; }
+    11% { opacity: .7; }
+    38% { transform: translate3d(8px, 2px, 0) rotate(4deg) scale(1.08); opacity: .45; }
+    58% { transform: translate3d(15px, -19px, 0) rotate(11deg) scale(.98); opacity: .48; }
+    78% { opacity: 0; }
+  }
+
+  @media (max-width: 980px) {
+    .floating-layer--left-small,
+    .floating-layer--right-small,
+    .floating-layer--left-back,
+    .floating-layer--right-back { display: none; }
+    .particle--tablet-hide { display: none; }
+    .floating-layer--left-large { left: -14%; }
+    .floating-layer--right-large { right: -14%; }
+  }
+
+  @media (max-width: 760px) {
+    .animated-hero { min-height: 600px; }
+    .animated-hero__content { width: min(100% - 28px, 620px); padding: 70px 0; }
+    .animated-hero__logo { width: 58px; height: 58px; margin-bottom: 20px; }
+    .animated-hero__copy-break { display: none; }
+    .floating-layer--left-medium { display: none; }
+    .floating-layer--left-large { width: 240px; left: -34%; top: 23%; --opacity-low: .36; --opacity-high: .48; }
+    .floating-layer--right-large { width: 250px; right: -36%; top: 29%; --opacity-low: .34; --opacity-high: .45; }
+    .particle--mobile-hide { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-layer,
+    .hero-particle { animation: none !important; }
+  }
+</style>
