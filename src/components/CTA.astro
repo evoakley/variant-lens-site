@@ -1,4 +1,214 @@
 ---
-const { heading = "Make every variant easier to understand", text = "Choose which images belong to each variant and keep unrelated images out of the way.", buttonLabel = "View VariantLens on Shopify" } = Astro.props;
+interface Props {
+  heading?: string;
+  text?: string;
+  buttonLabel?: string;
+  variant?: "default" | "homepage";
+}
+
+const {
+  variant = "default",
+  heading = variant === "homepage" ? "Give every variant the right gallery." : "Make every variant easier to understand",
+  text = "Choose which images belong to each variant and keep unrelated images out of the way.",
+  buttonLabel = variant === "homepage" ? "Install on Shopify" : "View VariantLens on Shopify",
+} = Astro.props;
 ---
-<section class="cta" id="install"><h2>{heading}</h2><p>{text}</p><a class="button" href="https://apps.shopify.com/variantlens">{buttonLabel}</a></section>
+
+{variant === "homepage" ? (
+  <section class="final-cta" id="install">
+    <div class="final-cta__visuals" aria-hidden="true">
+      <div class="gallery-card gallery-card--left-back"><span class="garment garment--stone"></span></div>
+      <div class="gallery-card gallery-card--left-front"><span class="garment"></span></div>
+      <div class="gallery-card gallery-card--left-detail"><span class="detail"></span></div>
+      <div class="gallery-card gallery-card--right-detail"><span class="detail"></span></div>
+      <div class="gallery-card gallery-card--right-front"><span class="garment"></span></div>
+      <div class="gallery-card gallery-card--right-back"><span class="garment garment--plum"></span></div>
+    </div>
+
+    <div class="shell final-cta__content">
+      <h2>{heading}</h2>
+      <p>{text}</p>
+      <a class="button final-cta__button" href="https://apps.shopify.com/variantlens"><span>{buttonLabel}</span></a>
+    </div>
+  </section>
+) : (
+  <section class="cta" id="install"><h2>{heading}</h2><p>{text}</p><a class="button" href="https://apps.shopify.com/variantlens">{buttonLabel}</a></section>
+)}
+
+<style>
+  .final-cta {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-height: 500px;
+    overflow: hidden;
+    color: #fff;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(111, 124, 187, .15), transparent 35%),
+      linear-gradient(125deg, #181922, #242633 72%, #1d1f29);
+  }
+
+  .final-cta::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 760px;
+    height: 250px;
+    border: 1px solid rgba(177, 185, 226, .08);
+    border-radius: 50%;
+    transform: rotate(-7deg);
+  }
+
+  .final-cta__content {
+    position: relative;
+    z-index: 3;
+    max-width: 760px;
+    padding-block: 105px;
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    margin: 0 0 19px;
+    color: #fff;
+    font-size: clamp(2.45rem, 4.8vw, 4.25rem);
+    letter-spacing: -.055em;
+    line-height: 1.02;
+  }
+
+  .final-cta__content > p {
+    max-width: 610px;
+    margin: 0 auto 31px;
+    color: #c9cbd6;
+    font-size: 1.06rem;
+    line-height: 1.65;
+  }
+
+  .final-cta__button {
+    position: relative;
+    isolation: isolate;
+    min-height: 50px;
+    overflow: hidden;
+    padding-inline: 25px;
+    border: 2px solid #8190d0;
+    border-radius: 9px;
+    background: #6b79b9;
+    box-shadow: 0 14px 30px rgba(5, 6, 12, .28);
+    transition: color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .final-cta__button::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: #fff;
+    transform: translateY(102%);
+    transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .final-cta__button:hover,
+  .final-cta__button:focus-visible {
+    color: #171820;
+    border-color: #fff;
+    background: #6b79b9;
+    box-shadow: 0 17px 34px rgba(5, 6, 12, .34);
+  }
+
+  .final-cta__button:hover::before,
+  .final-cta__button:focus-visible::before { transform: translateY(0); }
+  .final-cta__button span { position: relative; z-index: 1; }
+
+  .final-cta__visuals {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .gallery-card {
+    position: absolute;
+    overflow: hidden;
+    width: 120px;
+    aspect-ratio: .86;
+    border: 1px solid rgba(213, 217, 238, .24);
+    border-radius: 10px;
+    background: rgba(237, 238, 250, .92);
+    opacity: .24;
+    box-shadow: 0 22px 42px rgba(4, 5, 10, .24);
+    animation: final-card-drift 9s ease-in-out infinite alternate;
+  }
+
+  .gallery-card--left-back { width: 95px; left: 2%; top: 8%; opacity: .12; transform: rotate(-8deg); animation-delay: -5s; }
+  .gallery-card--left-front { width: 150px; left: 8%; bottom: -8%; opacity: .27; transform: rotate(6deg); animation-delay: -2s; }
+  .gallery-card--left-detail { width: 76px; left: 22%; top: 13%; opacity: .13; transform: rotate(-3deg); animation-delay: -7s; }
+  .gallery-card--right-detail { width: 80px; right: 22%; bottom: 9%; opacity: .13; transform: rotate(4deg); animation-delay: -4s; }
+  .gallery-card--right-front { width: 148px; right: 8%; top: -6%; opacity: .26; transform: rotate(-6deg); animation-delay: -6s; }
+  .gallery-card--right-back { width: 96px; right: 1%; bottom: 8%; opacity: .12; transform: rotate(8deg); animation-delay: -1s; }
+
+  .garment {
+    position: absolute;
+    width: 49%;
+    height: 54%;
+    left: 25.5%;
+    top: 20%;
+    border-radius: 35% 35% 15% 15%;
+    background: #59679e;
+  }
+
+  .garment::before,
+  .garment::after {
+    content: "";
+    position: absolute;
+    width: 29%;
+    height: 43%;
+    top: 8%;
+    border-radius: 50% 50% 20% 20%;
+    background: inherit;
+  }
+
+  .garment::before { left: -19%; transform: rotate(20deg); }
+  .garment::after { right: -19%; transform: rotate(-20deg); }
+  .garment--stone { background: #a8a195; }
+  .garment--plum { background: #8c6681; }
+
+  .detail {
+    position: absolute;
+    width: 54%;
+    aspect-ratio: 1;
+    left: 23%;
+    top: 20%;
+    border: 9px solid #59679e;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 4px #cbd0e7;
+  }
+
+  @keyframes final-card-drift {
+    from { translate: 0 3px; }
+    to { translate: 0 -7px; }
+  }
+
+  @media (max-width: 900px) {
+    .gallery-card--left-detail,
+    .gallery-card--right-detail { display: none; }
+    .gallery-card--left-front { left: 1%; }
+    .gallery-card--right-front { right: 1%; }
+  }
+
+  @media (max-width: 620px) {
+    .final-cta { min-height: 450px; }
+    .final-cta__content { padding-block: 84px; }
+    .final-cta h2 { font-size: clamp(2.25rem, 11vw, 3.15rem); }
+    .final-cta__content > p { font-size: 1rem; }
+    .gallery-card { opacity: .1; }
+    .gallery-card--left-front { width: 105px; left: -48px; bottom: -10px; }
+    .gallery-card--right-front { width: 105px; right: -48px; top: -10px; }
+    .gallery-card--left-back,
+    .gallery-card--right-back { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-card { animation: none; }
+    .final-cta__button::before { transition-duration: .01ms; }
+  }
+</style>
