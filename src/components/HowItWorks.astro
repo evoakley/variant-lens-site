@@ -1,0 +1,150 @@
+<section class="how-it-works section white" id="how-it-works">
+  <div class="shell">
+    <div class="section-head center how-it-works__heading">
+      <p class="eyebrow">How VariantLens works</p>
+      <h2>You assign the images. Shoppers see the right ones.</h2>
+      <p>Set each variant once, then keep your storefront gallery clear.</p>
+    </div>
+
+    <div class="how-it-works__steps">
+      <article class="process-step">
+        <div class="process-step__cue" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="18" rx="2"></rect><circle cx="11" cy="13" r="2"></circle><path d="m7 22 6-6 4 4 3-3 5 5"></path></svg>
+        </div>
+        <h3><span>1.</span> Pick a product</h3>
+        <p>Open a product from your Shopify catalogue inside VariantLens.</p>
+      </article>
+
+      <div class="process-connector" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="m5 2 8 8-8 8" fill="none" stroke="currentColor"></path></svg></div>
+
+      <article class="process-step">
+        <div class="process-step__cue" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M8 8h7v7H8zM19 17h7v7h-7z"></path><path d="M15 11h5a3 3 0 0 1 3 3v3"></path><path d="m20 14 3 3 3-3"></path></svg>
+        </div>
+        <h3><span>2.</span> Assign the images</h3>
+        <p>Drag the correct product media onto each variant and verify the result yourself.</p>
+      </article>
+
+      <div class="process-connector" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="m5 2 8 8-8 8" fill="none" stroke="currentColor"></path></svg></div>
+
+      <article class="process-step">
+        <div class="process-step__cue" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="2"></rect><path d="M9 12h14M9 16h8M9 20h11"></path><path d="m23 18 3 2-3 2z"></path></svg>
+        </div>
+        <h3><span>3.</span> Show the right gallery</h3>
+        <p>Shoppers see the assigned images as they move between colours and styles.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works { padding-block: 86px 82px; }
+
+  .how-it-works__heading {
+    max-width: 780px;
+    margin-bottom: 44px;
+  }
+
+  .how-it-works__heading h2 {
+    max-width: 720px;
+    margin-inline: auto;
+    font-size: clamp(1.95rem, 3.45vw, 2.95rem);
+  }
+  .how-it-works__heading > p:last-child { margin-bottom: 0; }
+
+  .how-it-works__steps {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 320px)
+      minmax(70px, 1fr)
+      minmax(0, 340px)
+      minmax(70px, 1fr)
+      minmax(0, 340px);
+    gap: 0;
+  }
+
+  .process-step { position: relative; min-width: 0; }
+
+  .process-connector {
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+    color: rgba(98, 112, 175, .72);
+  }
+
+  .process-connector::after { content: none !important; display: none !important; }
+
+  .process-connector svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .process-step__cue {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 12px;
+    color: #56639f;
+  }
+
+  .process-step__cue svg {
+    width: 36px;
+    height: 36px;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.55;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .process-step h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin: 0 0 6px;
+    color: var(--ink);
+    font-size: 1.19rem;
+    font-weight: 760;
+    line-height: 1.25;
+  }
+
+  .process-step h3 span {
+    color: #858895;
+    font-size: .82rem;
+    font-weight: 650;
+  }
+
+  .process-step > p {
+    max-width: 330px;
+    margin: 0;
+    color: var(--muted);
+    font-size: .96rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 760px) {
+    .how-it-works { padding-block: 68px 66px; }
+    .how-it-works__heading { margin-bottom: 40px; }
+    .how-it-works__steps { grid-template-columns: 1fr; gap: 34px; }
+    .process-connector { display: none; }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      column-gap: 14px;
+    }
+
+    .process-step__cue { grid-column: 1; grid-row: 1 / 3; margin: 0; }
+    .process-step h3 { grid-column: 2; margin-bottom: 6px; }
+    .process-step > p { grid-column: 2; max-width: 520px; }
+  }
+</style>

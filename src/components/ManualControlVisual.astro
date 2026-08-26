@@ -1,0 +1,260 @@
+<div class="assignment-concept" role="img" aria-label="Conceptual illustration showing product images manually assigned to a Navy variant, resulting in shoppers seeing only the relevant Navy images">
+  <div class="assignment-concept__variants">
+    <p class="concept-label">Variant</p>
+    <div class="variant-stack">
+      <span class="variant-pill variant-pill--selected"><i class="colour-dot colour-dot--navy"></i>Navy</span>
+      <span class="variant-pill"><i class="colour-dot colour-dot--stone"></i>Stone</span>
+      <span class="variant-pill"><i class="colour-dot colour-dot--plum"></i>Plum</span>
+    </div>
+  </div>
+
+  <div class="assignment-concept__action" aria-hidden="true">
+    <div class="floating-tile"><span class="product-shape"></span></div>
+    <div class="assignment-path"><span></span></div>
+    <p>Choose &amp; assign</p>
+  </div>
+
+  <div class="assignment-concept__result">
+    <p class="concept-label">Shopper sees</p>
+    <div class="result-grid">
+      <div class="image-tile image-tile--front"><span class="product-shape"></span><i>Front</i></div>
+      <div class="image-tile image-tile--back"><span class="product-shape"></span><i>Back</i></div>
+      <div class="image-tile image-tile--detail"><span class="detail-shape"></span><i>Detail</i></div>
+    </div>
+    <div class="assigned-state"><span>✓</span> Assigned to Navy</div>
+  </div>
+</div>
+
+<style>
+  .assignment-concept {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(110px, .72fr) minmax(100px, .62fr) minmax(210px, 1.35fr);
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    min-height: 360px;
+    padding: 38px;
+    overflow: hidden;
+    border: 1px solid #d8d9e4;
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 84% 18%, rgba(98, 112, 175, .08), transparent 32%),
+      #f8f8fb;
+  }
+
+  .assignment-concept::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    right: -80px;
+    bottom: -105px;
+    border: 1px solid rgba(98, 112, 175, .13);
+    border-radius: 50%;
+  }
+
+  .concept-label {
+    margin: 0 0 15px;
+    color: #666977;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .variant-stack { display: grid; gap: 9px; }
+
+  .variant-pill {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 39px;
+    padding: 7px 12px;
+    border: 1px solid #dedfe7;
+    border-radius: 7px;
+    color: #686b76;
+    background: rgba(255, 255, 255, .72);
+    font-size: .82rem;
+    font-weight: 700;
+  }
+
+  .variant-pill--selected {
+    border-color: #6270af;
+    color: #252a45;
+    background: #fff;
+    box-shadow: 0 7px 18px rgba(64, 72, 112, .08);
+  }
+
+  .colour-dot { width: 11px; height: 11px; border-radius: 50%; }
+  .colour-dot--navy { background: #374474; }
+  .colour-dot--stone { background: #c5bfb4; }
+  .colour-dot--plum { background: #8c6681; }
+
+  .assignment-concept__action {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+  }
+
+  .assignment-concept__action p {
+    margin: 0;
+    color: #626675;
+    font-size: .7rem;
+    font-weight: 750;
+    white-space: nowrap;
+  }
+
+  .floating-tile,
+  .image-tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #d9dbe7;
+    background: #eceef7;
+  }
+
+  .floating-tile {
+    z-index: 2;
+    width: 58px;
+    height: 66px;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(54, 62, 101, .14);
+    transform: rotate(-3deg);
+    animation: assignment-drift 5.5s ease-in-out infinite;
+  }
+
+  .assignment-path {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, #8993c1 0 5px, transparent 5px 10px);
+  }
+
+  .assignment-path::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #727eaf;
+    border-right: 1px solid #727eaf;
+    transform: rotate(45deg);
+  }
+
+  .assignment-concept__result {
+    position: relative;
+    z-index: 1;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+
+  .image-tile {
+    aspect-ratio: .82;
+    border-radius: 7px;
+  }
+
+  .image-tile i {
+    position: absolute;
+    left: 7px;
+    bottom: 6px;
+    color: #555b76;
+    font-size: .58rem;
+    font-style: normal;
+    font-weight: 750;
+  }
+
+  .product-shape {
+    position: absolute;
+    width: 52%;
+    height: 56%;
+    left: 24%;
+    top: 18%;
+    border-radius: 34% 34% 16% 16%;
+    background: #59679e;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25);
+  }
+
+  .product-shape::before,
+  .product-shape::after {
+    content: "";
+    position: absolute;
+    width: 28%;
+    height: 44%;
+    top: 8%;
+    border-radius: 50% 50% 20% 20%;
+    background: #59679e;
+  }
+
+  .product-shape::before { left: -18%; transform: rotate(20deg); }
+  .product-shape::after { right: -18%; transform: rotate(-20deg); }
+  .image-tile--back .product-shape { transform: scaleX(-1); background: #6e79a8; }
+  .image-tile--back .product-shape::before,
+  .image-tile--back .product-shape::after { background: #6e79a8; }
+
+  .detail-shape {
+    position: absolute;
+    width: 58%;
+    aspect-ratio: 1;
+    left: 21%;
+    top: 18%;
+    border: 8px solid #59679e;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 4px #c8cde3;
+  }
+
+  .assigned-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+    color: #454d76;
+    font-size: .72rem;
+    font-weight: 750;
+  }
+
+  .assigned-state span {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color: #fff;
+    background: #6270af;
+    font-size: .67rem;
+  }
+
+  @keyframes assignment-drift {
+    0%, 100% { transform: translate3d(-3px, 1px, 0) rotate(-3deg); }
+    50% { transform: translate3d(5px, -3px, 0) rotate(0); }
+  }
+
+  @media (max-width: 900px) {
+    .assignment-concept { padding: 28px; gap: 15px; }
+  }
+
+  @media (max-width: 520px) {
+    .assignment-concept {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      padding: 25px;
+    }
+
+    .variant-stack { grid-template-columns: repeat(3, 1fr); }
+    .variant-pill { justify-content: center; padding-inline: 7px; }
+    .assignment-concept__action { grid-template-columns: auto 1fr auto; align-items: center; width: 100%; }
+    .assignment-concept__action p { grid-column: 1 / -1; grid-row: 2; }
+    .floating-tile { width: 48px; height: 54px; }
+    .assignment-path { min-width: 80px; }
+    .assignment-concept__result { margin-top: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-tile { animation: none; }
+  }
+</style>

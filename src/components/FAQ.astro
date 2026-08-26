@@ -1,5 +1,168 @@
 ---
 const { items } = Astro.props;
 ---
-<div class="faq">{items.map((item: {question:string;answer:string}) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
 
+<div class="faq-accordion" data-faq-accordion>
+  {items.map((item: { question: string; answer: string }, index: number) => {
+    const buttonId = `faq-button-${index + 1}`;
+    const panelId = `faq-panel-${index + 1}`;
+
+    return (
+      <div class="faq-item" data-faq-item>
+        <h3>
+          <button
+            id={buttonId}
+            type="button"
+            aria-expanded="false"
+            aria-controls={panelId}
+            data-faq-button
+          >
+            <span>{item.question}</span>
+            <i class="faq-icon" aria-hidden="true"><span></span><span></span></i>
+          </button>
+        </h3>
+        <div
+          id={panelId}
+          class="faq-panel"
+          role="region"
+          aria-labelledby={buttonId}
+          data-faq-panel
+        >
+          <div class="faq-panel__inner"><p>{item.answer}</p></div>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-faq-accordion]").forEach((accordion) => {
+    if (accordion.dataset.ready === "true") return;
+    accordion.dataset.ready = "true";
+
+    const items = Array.from(accordion.querySelectorAll<HTMLElement>("[data-faq-item]"));
+
+    items.forEach((item) => {
+      const button = item.querySelector<HTMLButtonElement>("[data-faq-button]");
+      if (!button) return;
+
+      button.addEventListener("click", () => {
+        const willOpen = button.getAttribute("aria-expanded") !== "true";
+
+        items.forEach((candidate) => {
+          const candidateButton = candidate.querySelector<HTMLButtonElement>("[data-faq-button]");
+          candidate.classList.remove("faq-item--open");
+          candidateButton?.setAttribute("aria-expanded", "false");
+        });
+
+        if (willOpen) {
+          item.classList.add("faq-item--open");
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq-accordion {
+    width: 100%;
+    max-width: 680px;
+    border-top: 1px solid #dfe0e7;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #dfe0e7;
+    transition: border-color 260ms ease;
+  }
+
+  .faq-item--open { border-bottom-color: rgba(98, 112, 175, .55); }
+  .faq-item h3 { margin: 0; }
+
+  .faq-item button {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24px;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    padding: 23px 2px;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink);
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color 240ms ease, padding 240ms ease;
+  }
+
+  .faq-item button:hover,
+  .faq-item button[aria-expanded="true"] { color: #4e5b98; }
+
+  .faq-item button:focus-visible {
+    outline: 2px solid #6270af;
+    outline-offset: 5px;
+    border-radius: 3px;
+  }
+
+  .faq-icon {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+    color: #6270af;
+  }
+
+  .faq-icon span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 260ms cubic-bezier(.22, 1, .36, 1), opacity 220ms ease;
+  }
+
+  .faq-icon span:last-child { transform: translate(-50%, -50%) rotate(90deg); }
+  .faq-item button[aria-expanded="true"] .faq-icon span:last-child { transform: translate(-50%, -50%) rotate(0); opacity: 0; }
+
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 280ms cubic-bezier(.22, 1, .36, 1),
+      opacity 220ms ease;
+  }
+
+  .faq-panel__inner { min-height: 0; overflow: hidden; }
+
+  .faq-panel p {
+    max-width: 590px;
+    margin: 0;
+    padding: 0 38px 23px 2px;
+    color: var(--muted);
+    font-size: .95rem;
+    line-height: 1.62;
+  }
+
+  .faq-item--open .faq-panel { grid-template-rows: 1fr; opacity: 1; }
+
+  @media (max-width: 760px) {
+    .faq-accordion { max-width: none; }
+    .faq-item button { padding-block: 20px; }
+    .faq-panel p { padding-bottom: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item,
+    .faq-item button,
+    .faq-icon span,
+    .faq-panel { transition-duration: .01ms; }
+  }
+</style>
