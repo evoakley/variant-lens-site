@@ -65,41 +65,38 @@ const layers = {
     isolation: isolate;
     overflow: hidden;
     contain: paint;
-    background: #fff;
-    border-width: 3px;
+    background: #6b79b9;
+    border: 2px solid #8190d0;
+    color: #fff;
     transform: translateZ(0);
     backface-visibility: hidden;
     box-shadow: 0 10px 24px rgba(70, 83, 143, .24);
-    transition: color .2s ease;
+    transition: color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
 
   .hero-install-button::before {
     content: "";
     position: absolute;
     z-index: 0;
-    width: 120%;
-    height: 165%;
-    left: -10%;
-    top: -32%;
-    border-radius: 48% / 28%;
-    background: var(--accent);
+    inset: 0;
+    background: #fff;
     pointer-events: none;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(102%);
     backface-visibility: hidden;
     will-change: transform;
-    transition: transform .36s cubic-bezier(.16, 1, .3, 1);
+    transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
   }
 
   .hero-install-button:hover,
   .hero-install-button:focus-visible {
-    background: #fff;
-    border-color: var(--accent);
+    background: #6b79b9;
+    border-color: #fff;
     color: var(--ink);
   }
 
   .hero-install-button:hover::before,
   .hero-install-button:focus-visible::before {
-    transform: translate3d(0, -86%, 0);
+    transform: translateY(0);
   }
 
   .hero-install-button span {
@@ -113,22 +110,22 @@ const layers = {
     overflow: hidden;
     contain: paint;
     border-width: 3px;
-    transition: color .2s ease, border-color .2s ease;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: color 220ms ease, border-color 220ms ease;
   }
 
   .hero-secondary-button::before {
     content: "";
     position: absolute;
     z-index: 0;
-    width: 120%;
-    height: 165%;
-    left: -10%;
-    top: -32%;
-    border-radius: 48% / 28%;
+    inset: 0;
     background: #252733;
     pointer-events: none;
-    transform: translate3d(0, 86%, 0);
-    transition: transform .36s cubic-bezier(.16, 1, .3, 1);
+    transform: translateY(102%);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
   }
 
   .hero-secondary-button:hover,
@@ -140,7 +137,7 @@ const layers = {
 
   .hero-secondary-button:hover::before,
   .hero-secondary-button:focus-visible::before {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 
   .hero-secondary-button span {

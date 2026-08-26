@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+
+const themes = ["Dawn", "Sense", "Horizon", "Flow", "Reformation", "Impulse", "Pipeline", "Broadcast", "Atlantic", "Cascade"];
+const safetyPoints = [
+  ["Safe detection", "Checks the product, variant and gallery structure before takeover."],
+  ["Controlled takeover", "Hides the native gallery only after VariantLens is ready."],
+  ["Safe fallback", "Keeps the native gallery available if compatibility checks fail."],
+];
+---
+
+<BaseLayout
+  title="Shopify Theme Compatibility | VariantLens"
+  description="See which Shopify themes VariantLens is compatible with, how theme compatibility works, and how to get help with custom or third-party themes."
+  canonicalUrl="https://variantlens.app/theme-compatibility"
+>
+  <header class="compatibility-hero">
+    <div class="shell compatibility-hero__inner">
+      <p class="eyebrow">Theme support</p>
+      <h1>Built to work across Shopify themes.</h1>
+      <p>VariantLens includes dedicated compatibility handling for popular Shopify themes, plus a generic compatibility layer for many standard Shopify theme structures.</p>
+    </div>
+  </header>
+
+  <section class="compatibility-section compatibility-section--white">
+    <div class="shell compatibility-known">
+      <div class="compatibility-intro">
+        <p class="eyebrow">Known compatibility</p>
+        <h2>Compatible Shopify themes</h2>
+        <p>These are themes with known compatibility handling in VariantLens. Many other standard Shopify themes may also work through VariantLens' generic compatibility layer.</p>
+      </div>
+      <ul class="theme-grid" aria-label="Known compatible Shopify themes">
+        {themes.map((theme) => <li><span aria-hidden="true">✓</span>{theme}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <WaveDivider topColor="#ffffff" bottomColor="#f1f1f1" />
+
+  <section class="compatibility-section">
+    <div class="shell compatibility-split">
+      <div><p class="eyebrow">Broader support</p><h2>Using another Shopify theme?</h2></div>
+      <div class="compatibility-copy">
+        <p>VariantLens also includes a generic compatibility layer designed to safely recognise conventional Shopify product galleries.</p>
+        <p>This means additional standard Shopify themes may work automatically even when they do not have a named compatibility adapter.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compatibility-section compatibility-section--safety">
+    <div class="shell">
+      <div class="compatibility-intro compatibility-intro--center">
+        <p class="eyebrow">Storefront safety</p>
+        <h2>Designed to fail safely.</h2>
+        <p>VariantLens only takes over the product gallery when it can do so confidently. If it cannot safely enhance the gallery, the theme's native gallery remains available rather than leaving the product page broken.</p>
+      </div>
+      <div class="safety-grid">
+        {safetyPoints.map(([title, copy], index) => (
+          <article class="safety-point"><span aria-hidden="true">0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="compatibility-section compatibility-section--white">
+    <div class="shell compatibility-split">
+      <div><p class="eyebrow">Custom themes</p><h2>Using a custom or heavily modified theme?</h2></div>
+      <div class="compatibility-copy">
+        <p>Custom themes, third-party themes, and stores with heavily modified product-gallery behaviour may need additional compatibility support.</p>
+        <p>If VariantLens is not behaving correctly on your store, contact us and we can review the setup.</p>
+        <a class="compatibility-link" href="/support">Contact support <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <WaveDivider topColor="#ffffff" bottomColor="#20212a" />
+
+  <section class="compatibility-help">
+    <div class="shell compatibility-help__inner">
+      <div>
+        <p class="eyebrow">Compatibility help</p><h2>Need help with your theme?</h2>
+        <p>Tell us which theme you're using and what you're seeing. We'll help you work out whether additional compatibility support is needed.</p>
+      </div>
+      <a class="button" href="/support">Get compatibility help</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .compatibility-hero{padding:142px 0 94px;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(circle at 84% 22%,rgba(98,112,175,.14),transparent 27%),#fff}
+  .compatibility-hero__inner{max-width:900px;text-align:center}.compatibility-hero h1{max-width:780px;margin:0 auto;font-size:clamp(2.7rem,5.4vw,4.8rem);line-height:1.02;letter-spacing:-.06em}.compatibility-hero__inner>p:last-child{max-width:720px;margin:25px auto 0;color:var(--muted);font-size:1.12rem}
+  .compatibility-section{padding:96px 0}.compatibility-section--white{background:#fff}.compatibility-section--safety{background:#e9eaf1}
+  .compatibility-known,.compatibility-split{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(48px,8vw,110px);align-items:start}.compatibility-intro{max-width:540px}.compatibility-intro--center{max-width:760px;margin:0 auto;text-align:center}
+  .compatibility-section h2,.compatibility-help h2{margin:0 0 20px;font-size:clamp(2.1rem,4vw,3.55rem);line-height:1.06;letter-spacing:-.05em}.compatibility-intro>p:last-child,.compatibility-copy p,.compatibility-help p{color:var(--muted);font-size:1.04rem}
+  .theme-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}.theme-grid li{display:flex;align-items:center;gap:12px;min-height:58px;border-bottom:1px solid var(--line);font-weight:720}.theme-grid span{display:grid;width:23px;height:23px;place-items:center;border:1px solid rgba(98,112,175,.34);border-radius:50%;color:var(--accent-dark);font-size:.75rem}
+  .compatibility-copy{max-width:610px}.compatibility-copy p:first-child{margin-top:4px}.safety-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:52px}.safety-point{padding-top:22px;border-top:2px solid rgba(98,112,175,.55)}.safety-point>span{color:var(--accent-dark);font-size:.72rem;font-weight:800;letter-spacing:.1em}.safety-point h3{margin:13px 0 8px;font-size:1.2rem}.safety-point p{margin:0;color:var(--muted)}
+  .compatibility-link{display:inline-flex;gap:8px;margin-top:15px;color:var(--accent-dark);font-weight:780;text-decoration:none}.compatibility-link:hover{text-decoration:underline;text-underline-offset:4px}.compatibility-help{padding:74px 0;background:#20212a;color:#fff}.compatibility-help__inner{display:flex;align-items:center;justify-content:space-between;gap:54px}.compatibility-help__inner>div{max-width:690px}.compatibility-help h2{font-size:clamp(2rem,3.6vw,3rem)}.compatibility-help p{margin:0;color:#c8c9d1}.compatibility-help .eyebrow{color:#bfc6ed}.compatibility-help .button{flex:0 0 auto}
+  @media(max-width:760px){.compatibility-hero{padding:105px 0 66px}.compatibility-hero__inner>p:last-child{font-size:1rem}.compatibility-section{padding:68px 0}.compatibility-known,.compatibility-split{grid-template-columns:1fr;gap:36px}.theme-grid{gap:0 16px}.theme-grid li{min-height:54px;font-size:.94rem}.safety-grid{grid-template-columns:1fr;gap:26px;margin-top:38px}.compatibility-help__inner{align-items:flex-start;flex-direction:column;gap:28px}}
+  @media(max-width:420px){.theme-grid{grid-template-columns:1fr}}
+</style>
