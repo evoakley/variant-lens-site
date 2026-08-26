@@ -26,7 +26,7 @@ const layers = {
     <p>Choose which product images belong to each variant.<br class="animated-hero__copy-break"/> Shoppers only see the images relevant to their selection.</p>
     <div class="actions">
       <a class="button hero-install-button" href="https://apps.shopify.com/variantlens"><span>Install on Shopify</span></a>
-      <a class="button secondary" href="/#how-it-works">See how it works</a>
+      <a class="button secondary hero-secondary-button" href="/#how-it-works"><span>See how it works</span></a>
     </div>
   </div>
 </section>
@@ -105,6 +105,47 @@ const layers = {
   .hero-install-button span {
     position: relative;
     z-index: 2;
+  }
+
+  .hero-secondary-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    contain: paint;
+    border-width: 3px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+
+  .hero-secondary-button::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 120%;
+    height: 165%;
+    left: -10%;
+    top: -32%;
+    border-radius: 48% / 28%;
+    background: #252733;
+    pointer-events: none;
+    transform: translate3d(0, 86%, 0);
+    transition: transform .36s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .hero-secondary-button:hover,
+  .hero-secondary-button:focus-visible {
+    border-color: #252733;
+    background: transparent;
+    color: #fff;
+  }
+
+  .hero-secondary-button:hover::before,
+  .hero-secondary-button:focus-visible::before {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero-secondary-button span {
+    position: relative;
+    z-index: 1;
   }
 
   .floating-layer {
@@ -265,5 +306,6 @@ const layers = {
   @media (prefers-reduced-motion: reduce) {
     .floating-layer { animation: none !important; }
     .hero-install-button::before { transition-duration: .01ms; }
+    .hero-secondary-button::before { transition-duration: .01ms; }
   }
 </style>
