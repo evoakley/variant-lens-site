@@ -1,0 +1,142 @@
+---
+interface Props {
+  className?: string;
+  flipVertical?: boolean;
+  flipHorizontal?: boolean;
+  topColor?: string;
+  bottomColor?: string;
+}
+
+const {
+  className = "",
+  flipVertical = false,
+  flipHorizontal = false,
+  topColor = "#ffffff",
+  bottomColor = "#f4f2fb",
+} = Astro.props;
+
+const layers = ["rear", "third", "second", "front"];
+const tiles = [0, 1, 2, 3];
+const sourceWavePath = "M 0.0742188 67.429688 C 293.035156 67.429688 293.035156 0.511719 586 0.511719 L 586 89 L 0.0742188 89 Z M 0.0742188 67.429688";
+---
+
+<div
+  class:list={[
+    "wave-divider",
+    { "wave-divider--flip-vertical": flipVertical, "wave-divider--flip-horizontal": flipHorizontal },
+    className,
+  ]}
+  style={`--wave-top:${topColor};--wave-bottom:${bottomColor};`}
+  aria-hidden="true"
+>
+  {layers.map((layer) => (
+    <div class={`wave-divider__track wave-divider__track--${layer}`}>
+      {tiles.map(() => (
+        <svg viewBox="0 0 586 89" preserveAspectRatio="none" focusable="false">
+          <path d={sourceWavePath}></path>
+        </svg>
+      ))}
+    </div>
+  ))}
+</div>
+
+<style>
+  .wave-divider {
+    --wave-flip-x: 1;
+    --wave-flip-y: 1;
+    position: relative;
+    width: 100%;
+    height: clamp(50px, 5vw, 78px);
+    overflow: hidden;
+    background: var(--wave-top);
+    contain: layout paint;
+  }
+
+  .wave-divider--flip-horizontal { --wave-flip-x: -1; }
+  .wave-divider--flip-vertical { --wave-flip-y: -1; }
+
+  .wave-divider__track {
+    position: absolute;
+    left: 0;
+    width: 400vw;
+    height: 100%;
+    display: flex;
+    will-change: transform;
+    animation: wave-divider-scroll var(--wave-duration) linear infinite;
+  }
+
+  .wave-divider__track svg {
+    display: block;
+    flex: 0 0 100vw;
+    width: 100vw;
+    height: 100%;
+    color: var(--wave-colour);
+    opacity: var(--wave-opacity);
+    transform: scale(var(--wave-flip-x), var(--wave-flip-y));
+  }
+
+  .wave-divider__track svg:nth-child(even) {
+    transform: scale(calc(var(--wave-flip-x) * -1), var(--wave-flip-y));
+  }
+
+  .wave-divider__track path { fill: currentColor; }
+
+  .wave-divider__track--rear {
+    --wave-duration: 44s;
+    --wave-colour: var(--wave-bottom);
+    --wave-opacity: .2;
+    top: -6px;
+    animation-direction: reverse;
+  }
+
+  .wave-divider__track--third {
+    --wave-duration: 36s;
+    --wave-colour: var(--wave-bottom);
+    --wave-opacity: .3;
+    top: -2px;
+  }
+
+  .wave-divider__track--second {
+    --wave-duration: 28s;
+    --wave-colour: var(--wave-bottom);
+    --wave-opacity: .42;
+    top: 3px;
+    animation-direction: reverse;
+  }
+
+  .wave-divider__track--front {
+    --wave-duration: 20s;
+    --wave-colour: var(--wave-bottom);
+    --wave-opacity: 1;
+    top: 8px;
+  }
+
+  .wave-divider--flip-vertical .wave-divider__track--rear { top: 6px; }
+  .wave-divider--flip-vertical .wave-divider__track--third { top: 2px; }
+  .wave-divider--flip-vertical .wave-divider__track--second { top: -3px; }
+  .wave-divider--flip-vertical .wave-divider__track--front { top: -8px; }
+
+  @keyframes wave-divider-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-200vw, 0, 0); }
+  }
+
+  @media (max-width: 760px) {
+    .wave-divider { height: clamp(38px, 11vw, 52px); }
+    .wave-divider__track--rear { top: -4px; }
+    .wave-divider__track--third { top: -1px; }
+    .wave-divider__track--second { top: 2px; }
+    .wave-divider__track--front { top: 5px; }
+    .wave-divider--flip-vertical .wave-divider__track--rear { top: 4px; }
+    .wave-divider--flip-vertical .wave-divider__track--third { top: 1px; }
+    .wave-divider--flip-vertical .wave-divider__track--second { top: -2px; }
+    .wave-divider--flip-vertical .wave-divider__track--front { top: -5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave-divider__track {
+      animation: none;
+      will-change: auto;
+    }
+  }
+</style>

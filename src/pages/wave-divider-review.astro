@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+---
+
+<BaseLayout
+  title="Wave divider review | VariantLens"
+  description="Experimental VariantLens animated section divider review."
+  robots="noindex, nofollow"
+>
+  <section class="review-intro">
+    <div class="shell">
+      <p class="eyebrow">Divider experiment</p>
+      <h1>Animated SVG section divider</h1>
+      <p>Built directly from the supplied VariantLens silhouette.</p>
+    </div>
+  </section>
+
+  <section class="standalone-example" aria-label="Standalone divider example">
+    <p class="example-label">Standalone</p>
+    <WaveDivider />
+  </section>
+
+  <section class="section-example section-example--top">
+    <div class="shell">
+      <p class="eyebrow">Simple by design</p>
+      <h2>One shape, moving at four quiet speeds.</h2>
+      <p>The divider sits between sections without competing with the content.</p>
+    </div>
+  </section>
+  <WaveDivider topColor="#ffffff" bottomColor="#f4f2fb" />
+  <section class="section-example section-example--bottom">
+    <div class="shell">
+      <h2>A softer transition into the next idea.</h2>
+      <p>Every layer uses the original SVG geometry.</p>
+    </div>
+  </section>
+
+  <section class="flipped-example" aria-label="Flipped divider example">
+    <p class="example-label">Vertically and horizontally flipped</p>
+    <WaveDivider flipVertical={true} flipHorizontal={true} topColor="#f4f2fb" bottomColor="#ffffff" />
+  </section>
+</BaseLayout>
+
+<style>
+  .review-intro,
+  .section-example {
+    background: #fff;
+    padding: 84px 0;
+    text-align: center;
+  }
+
+  .review-intro { padding-top: 150px; }
+  .review-intro h1,
+  .section-example h2 { margin: 0; letter-spacing: -.045em; line-height: 1.08; }
+  .review-intro h1 { font-size: clamp(2.4rem, 5vw, 4.6rem); }
+  .section-example h2 { font-size: clamp(2rem, 4vw, 3.4rem); }
+  .review-intro p:last-child,
+  .section-example p:last-child { color: var(--muted); }
+
+  .standalone-example,
+  .flipped-example { overflow: hidden; background: #fff; padding-top: 34px; }
+  .example-label { margin: 0 0 18px; text-align: center; color: var(--muted); font-size: .88rem; }
+  .section-example--top { padding-bottom: 54px; }
+  .section-example--bottom { background: #f4f2fb; padding-top: 64px; }
+  .flipped-example { background: #f4f2fb; padding-top: 72px; }
+
+  @media (max-width: 760px) {
+    .review-intro { padding: 124px 0 62px; }
+    .section-example { padding: 62px 0; }
+    .section-example--top { padding-bottom: 42px; }
+    .section-example--bottom { padding-top: 48px; }
+  }
+</style>
