@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import FAQ from "../components/FAQ.astro";
+import HeroAnimated from "../components/HeroAnimated.astro";
 
 const faqs = [
   { question: "Does VariantLens assign images automatically?", answer: "No. You choose and verify the images assigned to every variant." },
@@ -10,7 +11,7 @@ const faqs = [
 ];
 ---
 <BaseLayout title="VariantLens — Show the right Shopify images for every variant" description="Manually assign Shopify product images to variants so shoppers see only the images relevant to their selected colour or style.">
-  <section class="hero"><div class="hero-inner"><img class="hero-logo" src="/assets/brand/variantlens-mark.png" alt="VariantLens" width="1200" height="1200"/><h1>Show the right images<br/>for every variant.</h1><p>Choose which product images belong to each variant.<br class="hero-copy-break"/> Shoppers only see the images relevant to their selection.</p><div class="actions"><a class="button" href="https://apps.shopify.com/variantlens">Install on Shopify</a><a class="button secondary" href="#how-it-works">See how it works</a></div></div></section>
+  <HeroAnimated />
   <section class="section white" id="how-it-works"><div class="shell"><div class="section-head center"><p class="eyebrow">Simple by design</p><h2>Your product gallery, organised by variant.</h2><p>Keep control in your hands without manually rebuilding every product gallery in your theme.</p></div><div class="grid-3"><div class="feature"><strong>1. Pick a product</strong><p>Open a product from your Shopify catalogue inside VariantLens.</p></div><div class="feature"><strong>2. Assign its images</strong><p>Drag the correct product media onto each variant and verify the result yourself.</p></div><div class="feature"><strong>3. Publish a clearer gallery</strong><p>Shoppers see the assigned images as they move between colours and styles.</p></div></div></div></section>
   <section class="section"><div class="shell split"><div><p class="eyebrow">Manual visual control</p><h2>No guessing. No automatic mismatches.</h2><p class="lead">You know your catalogue. VariantLens gives you a direct way to decide which images shoppers see for each variant.</p><a href="/shopify-variant-images-by-color">Learn about colour variant images →</a></div><div class="visual"><div class="mock"><div class="mock-row"><div class="swatches"><span class="swatch"></span><span class="swatch"></span><span class="swatch"></span></div><strong>Navy</strong></div><div class="mock-row"><span>Images</span><span>Front · Back · Detail</span></div><div class="mock-row"><span>Result</span><span>Only Navy images displayed</span></div></div></div></div></section>
   <section class="section white"><div class="shell"><div class="section-head"><p class="eyebrow">Common questions</p><h2>What merchants need to know.</h2></div><FAQ items={faqs}/></div></section>

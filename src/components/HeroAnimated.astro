@@ -12,20 +12,6 @@ const layers = {
 <section class="animated-hero" aria-labelledby="animated-hero-title">
   <img class="animated-hero__base" src={layers.base} alt="" width="1751" height="898" aria-hidden="true"/>
   <div class="animated-hero__visuals" aria-hidden="true">
-    <span class="hero-particle hero-particle--star particle--left-one particle--path-a"></span>
-    <span class="hero-particle hero-particle--star particle--left-two particle--path-b"></span>
-    <span class="hero-particle hero-particle--star particle--left-three particle--path-c particle--tablet-hide"></span>
-    <span class="hero-particle hero-particle--star particle--left-four particle--path-a particle--mobile-hide"></span>
-    <span class="hero-particle hero-particle--star particle--left-bottom-one particle--path-c"></span>
-    <span class="hero-particle hero-particle--star particle--left-bottom-two particle--path-b particle--mobile-hide"></span>
-    <span class="hero-particle hero-particle--star particle--left-bottom-three particle--path-a particle--tablet-hide"></span>
-    <span class="hero-particle hero-particle--star particle--right-one particle--path-b"></span>
-    <span class="hero-particle hero-particle--star particle--right-two particle--path-a"></span>
-    <span class="hero-particle hero-particle--star particle--right-three particle--path-c particle--tablet-hide"></span>
-    <span class="hero-particle hero-particle--star particle--right-four particle--path-b particle--mobile-hide"></span>
-    <span class="hero-particle hero-particle--star particle--right-bottom-one particle--path-a"></span>
-    <span class="hero-particle hero-particle--star particle--right-bottom-two particle--path-c particle--mobile-hide"></span>
-    <span class="hero-particle hero-particle--star particle--right-bottom-three particle--path-b particle--tablet-hide"></span>
     <img class="floating-layer floating-layer--left-back" src={layers.leftMedium} alt="" width="1254" height="1254"/>
     <img class="floating-layer floating-layer--left-large" src={layers.leftLarge} alt="" width="1254" height="1254"/>
     <img class="floating-layer floating-layer--left-medium" src={layers.leftMedium} alt="" width="1254" height="1254"/>
@@ -39,7 +25,7 @@ const layers = {
     <h1 id="animated-hero-title">Show the right images<br/>for every variant.</h1>
     <p>Choose which product images belong to each variant.<br class="animated-hero__copy-break"/> Shoppers only see the images relevant to their selection.</p>
     <div class="actions">
-      <a class="button" href="https://apps.shopify.com/variantlens">Install on Shopify</a>
+      <a class="button hero-install-button" href="https://apps.shopify.com/variantlens"><span>Install on Shopify</span></a>
       <a class="button secondary" href="/#how-it-works">See how it works</a>
     </div>
   </div>
@@ -74,6 +60,53 @@ const layers = {
 
   .animated-hero__visuals { z-index: -1; }
 
+  .hero-install-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    contain: paint;
+    background: #fff;
+    border-width: 3px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    box-shadow: 0 10px 24px rgba(70, 83, 143, .24);
+    transition: color .2s ease;
+  }
+
+  .hero-install-button::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 120%;
+    height: 165%;
+    left: -10%;
+    top: -32%;
+    border-radius: 48% / 28%;
+    background: var(--accent);
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform;
+    transition: transform .36s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .hero-install-button:hover,
+  .hero-install-button:focus-visible {
+    background: #fff;
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+
+  .hero-install-button:hover::before,
+  .hero-install-button:focus-visible::before {
+    transform: translate3d(0, -86%, 0);
+  }
+
+  .hero-install-button span {
+    position: relative;
+    z-index: 2;
+  }
+
   .floating-layer {
     position: absolute;
     height: auto;
@@ -82,42 +115,6 @@ const layers = {
     will-change: transform;
   }
 
-  .hero-particle {
-    position: absolute;
-    z-index: 5;
-    display: block;
-    width: var(--particle-size);
-    height: var(--particle-size);
-    max-width: none;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-
-  .hero-particle--star { background-image: url('/assets/hero-layers/particle-star.png'); }
-
-  .particle--path-a { animation: particle-path-a 6.2s ease-in-out infinite; }
-  .particle--path-b { animation: particle-path-b 7.4s ease-in-out infinite; }
-  .particle--path-c { animation: particle-path-c 5.3s ease-in-out infinite; }
-
-  .particle--left-one { --particle-size: 32px; left: 4%; top: 12%; animation-delay: -1.2s; }
-  .particle--left-two { --particle-size: 25px; left: 12%; top: 24%; animation-delay: -4.1s; }
-  .particle--left-three { --particle-size: 38px; left: 3%; top: 43%; animation-delay: -2.6s; }
-  .particle--left-four { --particle-size: 22px; left: 19%; top: 55%; animation-delay: -5.2s; }
-  .particle--left-bottom-one { --particle-size: 30px; left: 6%; bottom: 8%; animation-delay: -3.4s; }
-  .particle--left-bottom-two { --particle-size: 40px; left: 14%; bottom: 17%; animation-delay: -.7s; }
-  .particle--left-bottom-three { --particle-size: 23px; left: 22%; bottom: 6%; animation-delay: -4.8s; }
-
-  .particle--right-one { --particle-size: 28px; right: 5%; top: 13%; animation-delay: -2.1s; }
-  .particle--right-two { --particle-size: 36px; right: 13%; top: 27%; animation-delay: -5.5s; }
-  .particle--right-three { --particle-size: 24px; right: 3%; top: 45%; animation-delay: -1.6s; }
-  .particle--right-four { --particle-size: 34px; right: 20%; top: 57%; animation-delay: -3.8s; }
-  .particle--right-bottom-one { --particle-size: 39px; right: 6%; bottom: 8%; animation-delay: -4.4s; }
-  .particle--right-bottom-two { --particle-size: 27px; right: 15%; bottom: 19%; animation-delay: -2.9s; }
-  .particle--right-bottom-three { --particle-size: 21px; right: 23%; bottom: 5%; animation-delay: -.9s; }
 
   .floating-layer--left-large {
     z-index: 2;
@@ -246,34 +243,11 @@ const layers = {
     from { transform: translate3d(10px, 11px, 0) scale(1.01); opacity: var(--opacity-low); }
     to { transform: translate3d(-15px, -12px, 0) scale(.99); opacity: var(--opacity-high); }
   }
-  @keyframes particle-path-a {
-    0%, 100% { transform: translate3d(-12px, 9px, 0) rotate(-8deg) scale(.82); opacity: 0; }
-    12% { opacity: .72; }
-    42% { transform: translate3d(4px, -8px, 0) rotate(2deg) scale(1); opacity: .48; }
-    68% { transform: translate3d(18px, -18px, 0) rotate(9deg) scale(1.08); opacity: .82; }
-    90% { opacity: 0; }
-  }
-  @keyframes particle-path-b {
-    0%, 100% { transform: translate3d(11px, 13px, 0) rotate(7deg) scale(.9); opacity: 0; }
-    14% { opacity: .68; }
-    46% { transform: translate3d(-5px, -4px, 0) rotate(-2deg) scale(1.04); opacity: .42; }
-    70% { transform: translate3d(-19px, -17px, 0) rotate(-10deg) scale(.96); opacity: .78; }
-    91% { opacity: 0; }
-  }
-  @keyframes particle-path-c {
-    0%, 100% { transform: translate3d(-7px, 17px, 0) rotate(-5deg) scale(.86); opacity: 0; }
-    11% { opacity: .7; }
-    38% { transform: translate3d(8px, 2px, 0) rotate(4deg) scale(1.08); opacity: .45; }
-    58% { transform: translate3d(15px, -19px, 0) rotate(11deg) scale(.98); opacity: .48; }
-    78% { opacity: 0; }
-  }
-
   @media (max-width: 980px) {
     .floating-layer--left-small,
     .floating-layer--right-small,
     .floating-layer--left-back,
     .floating-layer--right-back { display: none; }
-    .particle--tablet-hide { display: none; }
     .floating-layer--left-large { left: -14%; }
     .floating-layer--right-large { right: -14%; }
   }
@@ -286,11 +260,10 @@ const layers = {
     .floating-layer--left-medium { display: none; }
     .floating-layer--left-large { width: 240px; left: -34%; top: 23%; --opacity-low: .36; --opacity-high: .48; }
     .floating-layer--right-large { width: 250px; right: -36%; top: 29%; --opacity-low: .34; --opacity-high: .45; }
-    .particle--mobile-hide { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .floating-layer,
-    .hero-particle { animation: none !important; }
+    .floating-layer { animation: none !important; }
+    .hero-install-button::before { transition-duration: .01ms; }
   }
 </style>
