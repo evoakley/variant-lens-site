@@ -1,27 +1,27 @@
 ---
 const layerRoot = "/assets/hero-layers";
 const layers = {
-  base: `${layerRoot}/hero-base.png`,
-  leftLarge: `${layerRoot}/card-facing-right-large.png`,
-  leftMedium: `${layerRoot}/card-facing-right-medium.png`,
-  leftSmall: `${layerRoot}/card-facing-right-small.png`,
-  rightLarge: `${layerRoot}/card-facing-left-large.png`,
-  rightSmall: `${layerRoot}/card-facing-left-grid.png`,
+  base: `${layerRoot}/hero-base.webp`,
+  leftLarge: `${layerRoot}/card-facing-right-large.webp`,
+  leftMedium: `${layerRoot}/card-facing-right-medium.webp`,
+  leftSmall: `${layerRoot}/card-facing-right-small.webp`,
+  rightLarge: `${layerRoot}/card-facing-left-large.webp`,
+  rightSmall: `${layerRoot}/card-facing-left-grid.webp`,
 };
 ---
 <section class="animated-hero" aria-labelledby="animated-hero-title">
-  <img class="animated-hero__base" src={layers.base} alt="" width="1751" height="898" aria-hidden="true"/>
+  <img class="animated-hero__base" src={layers.base} alt="" width="1751" height="898" loading="eager" fetchpriority="high" decoding="async" aria-hidden="true"/>
   <div class="animated-hero__visuals" aria-hidden="true">
-    <img class="floating-layer floating-layer--left-back" src={layers.leftMedium} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--left-large" src={layers.leftLarge} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--left-medium" src={layers.leftMedium} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--left-small" src={layers.leftSmall} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--right-back" src={layers.rightSmall} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--right-large" src={layers.rightLarge} alt="" width="1254" height="1254"/>
-    <img class="floating-layer floating-layer--right-small" src={layers.rightSmall} alt="" width="1254" height="1254"/>
+    <img class="floating-layer floating-layer--left-back" src={layers.leftMedium} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--left-large" src={layers.leftLarge} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--left-medium" src={layers.leftMedium} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--left-small" src={layers.leftSmall} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--right-back" src={layers.rightSmall} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--right-large" src={layers.rightLarge} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
+    <img class="floating-layer floating-layer--right-small" src={layers.rightSmall} alt="" width="1254" height="1254" loading="lazy" fetchpriority="low" decoding="async"/>
   </div>
   <div class="animated-hero__content">
-    <img class="animated-hero__logo" src="/assets/brand/variantlens-mark.png" alt="VariantLens" width="1200" height="1200"/>
+    <img class="animated-hero__logo" src="/assets/brand/variantlens-mark.webp" alt="VariantLens" width="1200" height="1200" decoding="async"/>
     <h1 id="animated-hero-title">Show the right images<br/>for every variant.</h1>
     <p>Choose which product images belong to each variant.<br class="animated-hero__copy-break"/> Shoppers only see the images relevant to their selection.</p>
     <div class="actions">

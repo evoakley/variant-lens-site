@@ -1,10 +1,14 @@
-<div class="assignment-concept" role="img" aria-label="Conceptual illustration showing product images manually assigned to a Navy variant, resulting in shoppers seeing only the relevant Navy images">
+---
+const { cycle = false } = Astro.props;
+---
+
+<div class:list={["assignment-concept", { "assignment-concept--cycling": cycle }]} role="img" aria-label={cycle ? "Conceptual illustration cycling through Navy, Stone and Plum variants and their matching assigned galleries" : "Conceptual illustration showing product images manually assigned to a Navy variant, resulting in shoppers seeing only the relevant Navy images"}>
   <div class="assignment-concept__variants">
     <p class="concept-label">Variant</p>
     <div class="variant-stack">
-      <span class="variant-pill variant-pill--selected"><i class="colour-dot colour-dot--navy"></i>Navy</span>
-      <span class="variant-pill"><i class="colour-dot colour-dot--stone"></i>Stone</span>
-      <span class="variant-pill"><i class="colour-dot colour-dot--plum"></i>Plum</span>
+      <span class="variant-pill variant-pill--navy variant-pill--selected"><i class="colour-dot colour-dot--navy"></i>Navy</span>
+      <span class="variant-pill variant-pill--stone"><i class="colour-dot colour-dot--stone"></i>Stone</span>
+      <span class="variant-pill variant-pill--plum"><i class="colour-dot colour-dot--plum"></i>Plum</span>
     </div>
   </div>
 
@@ -21,7 +25,7 @@
       <div class="image-tile image-tile--back"><span class="product-shape"></span><i>Back</i></div>
       <div class="image-tile image-tile--detail"><span class="detail-shape"></span><i>Detail</i></div>
     </div>
-    <div class="assigned-state"><span>✓</span> Assigned to Navy</div>
+    <div class="assigned-state"><span class="assigned-state__check">✓</span><span class="assigned-label assigned-label--navy">Assigned to Navy</span><span class="assigned-label assigned-label--stone">Assigned to Stone</span><span class="assigned-label assigned-label--plum">Assigned to Plum</span></div>
   </div>
 </div>
 
@@ -218,7 +222,7 @@
     font-weight: 750;
   }
 
-  .assigned-state span {
+  .assigned-state__check {
     display: grid;
     place-items: center;
     width: 18px;
@@ -228,6 +232,43 @@
     background: #6270af;
     font-size: .67rem;
   }
+
+  .assigned-label--stone,
+  .assigned-label--plum { display: none; }
+
+  .assignment-concept--cycling .variant-pill--navy { animation: selected-navy 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .variant-pill--stone { animation: selected-stone 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .variant-pill--plum { animation: selected-plum 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .product-shape,
+  .assignment-concept--cycling .product-shape::before,
+  .assignment-concept--cycling .product-shape::after { animation: gallery-colour 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .image-tile--back .product-shape,
+  .assignment-concept--cycling .image-tile--back .product-shape::before,
+  .assignment-concept--cycling .image-tile--back .product-shape::after { animation-name: gallery-colour-back; }
+  .assignment-concept--cycling .detail-shape { animation: detail-colour 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .assigned-state { display: grid; grid-template-columns: 18px 1fr; min-width: 150px; }
+  .assignment-concept--cycling .assigned-label { display: inline; grid-area: 1 / 2; opacity: 0; animation: label-navy 7.5s ease-in-out infinite; }
+  .assignment-concept--cycling .assigned-label--stone { animation-name: label-stone; }
+  .assignment-concept--cycling .assigned-label--plum { animation-name: label-plum; }
+
+  @keyframes selected-navy {
+    0%, 29%, 100% { border-color: #6270af; color: #252a45; background: #fff; box-shadow: 0 7px 18px rgba(64,72,112,.08); }
+    35%, 94% { border-color: #dedfe7; color: #686b76; background: rgba(255,255,255,.72); box-shadow: none; }
+  }
+  @keyframes selected-stone {
+    0%, 29%, 68%, 100% { border-color: #dedfe7; color: #686b76; background: rgba(255,255,255,.72); box-shadow: none; }
+    35%, 62% { border-color: #9d978c; color: #49463f; background: #fff; box-shadow: 0 7px 18px rgba(91,84,72,.08); }
+  }
+  @keyframes selected-plum {
+    0%, 62%, 100% { border-color: #dedfe7; color: #686b76; background: rgba(255,255,255,.72); box-shadow: none; }
+    68%, 94% { border-color: #8c6681; color: #513c4b; background: #fff; box-shadow: 0 7px 18px rgba(89,61,81,.08); }
+  }
+  @keyframes gallery-colour { 0%,29%,100%{background:#59679e} 35%,62%{background:#aaa195} 68%,94%{background:#8c6681} }
+  @keyframes gallery-colour-back { 0%,29%,100%{background:#6e79a8} 35%,62%{background:#bbb3a8} 68%,94%{background:#9b7892} }
+  @keyframes detail-colour { 0%,29%,100%{border-color:#59679e} 35%,62%{border-color:#aaa195} 68%,94%{border-color:#8c6681} }
+  @keyframes label-navy { 0%,29%,100%{opacity:1} 35%,94%{opacity:0} }
+  @keyframes label-stone { 0%,29%,68%,100%{opacity:0} 35%,62%{opacity:1} }
+  @keyframes label-plum { 0%,62%,100%{opacity:0} 68%,94%{opacity:1} }
 
   @keyframes assignment-drift {
     0%, 100% { transform: translate3d(-3px, 1px, 0) rotate(-3deg); }
@@ -256,5 +297,14 @@
 
   @media (prefers-reduced-motion: reduce) {
     .floating-tile { animation: none; }
+    .assignment-concept--cycling .variant-pill,
+    .assignment-concept--cycling .product-shape,
+    .assignment-concept--cycling .product-shape::before,
+    .assignment-concept--cycling .product-shape::after,
+    .assignment-concept--cycling .detail-shape,
+    .assignment-concept--cycling .assigned-label { animation: none; }
+    .assignment-concept--cycling .assigned-label--navy { opacity: 1; }
+    .assignment-concept--cycling .assigned-label--stone,
+    .assignment-concept--cycling .assigned-label--plum { opacity: 0; }
   }
 </style>
