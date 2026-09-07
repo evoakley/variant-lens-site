@@ -1,0 +1,503 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WaveDivider from "../components/WaveDivider.astro";
+
+const faqs = [
+  [
+    "Can Shopify variants have multiple images?",
+    "Shopify products can contain multiple pieces of product media, but merchants often want more control over which group of images appears when a particular variant is selected. The exact behaviour depends on the theme and storefront setup."
+  ],
+  [
+    "Can I show different images for different colours in Shopify?",
+    "Yes. A product gallery can be configured so that different groups of images are shown for different colour options. This may be achieved through the theme, custom code or a variant image app depending on the store's requirements."
+  ],
+  [
+    "Why do images from other variants still appear?",
+    "Many Shopify product galleries are designed to display the product's full media set. Selecting a variant does not necessarily mean every unrelated image will automatically be removed from the gallery."
+  ],
+  [
+    "Do variant image apps work with every Shopify theme?",
+    "Theme implementations differ, so compatibility should always be checked before relying on a variant gallery solution. VariantLens maintains a separate theme compatibility page for this purpose."
+  ]
+];
+
+const relatedGuides = [
+  {
+    href: "/show-only-selected-variant-images-shopify",
+    title: "Show Only Selected Variant Images",
+    description: "Learn how to keep Shopify galleries focused on the variant a customer selects."
+  },
+  {
+    href: "/shopify-variant-images-by-color",
+    title: "Variant Images by Colour",
+    description: "Organise Shopify product galleries around colour-specific product images."
+  },
+  {
+    href: "/hide-other-variant-images-shopify",
+    title: "Hide Other Variant Images",
+    description: "Understand how to remove unrelated colours and styles from the active variant gallery."
+  }
+];
+---
+
+<BaseLayout
+  title="Shopify Variant Images: How to Show the Right Images for Each Variant"
+  description="Learn how Shopify variant images work, why unrelated product images can remain visible after a variant is selected, and how to create cleaner variant-specific product galleries."
+  canonicalUrl="https://variantlens.app/shopify-variant-images/"
+>
+  <div class="guide-page">
+    <header class="guide-hero">
+      <div class="shell guide-hero__inner">
+        <p class="eyebrow">Variant image guide</p>
+        <h1>Shopify Variant Images: How to Show the Right Images for Each Variant</h1>
+        <p class="guide-hero__intro">Shopify products often use variants for options such as colour, style, material or finish. The problem is that product galleries can still show images belonging to other variants, even after a customer has made their selection.</p>
+        <p class="guide-hero__intro">This guide explains how Shopify variant images work, the common gallery problems merchants run into, and the different ways you can make the product gallery respond more clearly to the variant a customer selects.</p>
+        <nav class="guide-toc" aria-label="In this guide">
+          <p>In this guide</p>
+          <div class="guide-toc__links">
+            <a href="#how-variant-images-work">How Shopify variant images work</a>
+            <a href="#common-problem">The common variant gallery problem</a>
+            <a href="#ways-to-manage">Different ways to manage variant images</a>
+            <a href="#by-colour">Showing images by colour</a>
+            <a href="#theme-compatibility">Shopify theme compatibility</a>
+            <a href="#using-variantlens">Using VariantLens</a>
+            <a href="#faq">Frequently asked questions</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="guide-section guide-section--white" id="common-problem">
+      <div class="shell">
+        <div class="section-intro">
+          <p class="eyebrow">The common problem</p>
+          <h2>The common Shopify variant image problem</h2>
+          <div class="section-copy">
+            <p>Imagine a T-shirt available in Black, Blue and Green.</p>
+            <p>The product page contains photographs for all three options. A customer selects Black, but the gallery continues to show Blue and Green images as they browse through the product media.</p>
+            <p>The selected variant may technically be correct, but the gallery can still make it harder for the customer to understand exactly what they are looking at.</p>
+          </div>
+        </div>
+        <div class="problem-visual" aria-label="Black selected while blue and green T-shirt images remain visible in the product gallery">
+          <img class="problem-visual__image" src="/assets/brand/variant-image-problem-tshirts.png" alt="Black selected while blue and green T-shirt images remain visible in the product gallery" width="2030" height="774" loading="lazy" decoding="async" />
+        </div>
+        <p class="inline-link">If this is the issue you are trying to solve, read our guide on how to <a href="/show-only-selected-variant-images-shopify">show only the selected variant images</a> in Shopify.</p>
+      </div>
+    </section>
+
+    <section class="guide-section" id="how-variant-images-work">
+      <div class="shell split-section">
+        <div class="section-intro">
+          <p class="eyebrow">The basics</p>
+          <h2>How Shopify variant images work</h2>
+          <div class="section-copy">
+            <p>A Shopify product can contain multiple variants and multiple pieces of product media.</p>
+            <p>For example, a T-shirt could have:</p>
+            <ul class="simple-list"><li>Black</li><li>Blue</li><li>Green</li></ul>
+            <p>Each colour may have several photographs showing different angles, details or lifestyle shots.</p>
+            <p>The challenge is not simply assigning one image to a variant. Many merchants want an entire group of images to change depending on the customer's selected option.</p>
+          </div>
+        </div>
+        <div class="storefront-card" data-variant="black" aria-label="Mini storefront example. Select a variant to change the product gallery.">
+          <div class="storefront-card__heading"><span>Storefront example</span><small>Select a variant</small></div>
+          <div class="storefront-card__image">
+            <img data-storefront-main src="/assets/guides/storefront-shirts/black-4.png" alt="Black T-shirt lifestyle image" width="1254" height="1254" loading="lazy" decoding="async" />
+          </div>
+          <div class="storefront-card__selector" role="group" aria-label="Select a product variant">
+            <button type="button" class="is-active" data-variant-option="black" aria-pressed="true">Black</button>
+            <button type="button" data-variant-option="blue" aria-pressed="false">Blue</button>
+            <button type="button" data-variant-option="green" aria-pressed="false">Green</button>
+          </div>
+          <div class="storefront-card__gallery" data-storefront-gallery aria-label="Black product gallery" aria-live="polite">
+            <span data-thumbnail-index="0"><img src="/assets/guides/storefront-shirts/black-1.png" alt="Black T-shirt front" width="1254" height="1254" loading="lazy" decoding="async" /></span>
+            <span data-thumbnail-index="1"><img src="/assets/guides/storefront-shirts/black-2.png" alt="Black T-shirt back" width="1254" height="1254" loading="lazy" decoding="async" /></span>
+            <span data-thumbnail-index="2"><img src="/assets/guides/storefront-shirts/black-3.png" alt="Black T-shirt detail" width="1254" height="1254" loading="lazy" decoding="async" /></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section guide-section--soft" id="ways-to-manage">
+      <div class="shell ways-panel">
+        <div class="section-intro section-intro--wide">
+          <p class="eyebrow">Your options</p>
+          <h2>Different ways to manage Shopify variant images</h2>
+          <p>There is no single setup that works for every Shopify store. The right approach depends on the theme, the number of variants, the amount of product media and how much control the merchant wants over the gallery.</p>
+        </div>
+        <div class="info-grid">
+          <article><span>01</span><h3>Use Shopify's existing product media</h3><p>For simple products, Shopify's existing product media and variant image behaviour may be enough. This works best when each variant only needs a small amount of visual differentiation.</p></article>
+          <article><span>02</span><h3>Custom theme code</h3><p>Theme code can be used to change how variant media behaves on the storefront. This can provide more control, but it also creates ongoing maintenance requirements and may need to be adjusted when themes are changed or updated.</p></article>
+          <article><span>03</span><h3>Use a variant image app</h3><p>A variant image app can provide a merchant-facing way to control which images belong to each variant without manually rebuilding the product gallery in theme code.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section guide-section--white" id="by-colour">
+      <div class="shell split-section split-section--colour">
+        <div class="section-intro">
+          <p class="eyebrow">Colour-specific galleries</p>
+          <h2>Showing Shopify variant images by colour</h2>
+          <div class="section-copy">
+            <p>Colour is one of the most common reasons merchants need variant-specific galleries.</p>
+            <p>A T-shirt might have several photographs for Black, several for Blue and several for Green. Instead of showing every photograph together, the gallery can respond to the customer's colour selection.</p>
+          </div>
+        </div>
+        <div class="colour-example colour-example--graphic" aria-label="Black, Blue and Green colour-specific product galleries">
+          <img src="/assets/brand/variant-images-by-colour.png" alt="Black, Blue and Green product galleries, each with matching product and detail images" width="1448" height="1086" loading="lazy" decoding="async" />
+        </div>
+      </div>
+      <div class="shell"><p class="inline-link">For a more focused walkthrough, read our guide to <a href="/shopify-variant-images-by-color">Shopify variant images by colour</a>.</p></div>
+    </section>
+
+    <section class="guide-section guide-section--logo-gradient" id="hiding-images">
+      <div class="hiding-images-bg" aria-hidden="true"><span class="media-object media-object--large"></span><span class="media-object media-object--small"></span><span class="media-object media-object--tilted"></span><span class="media-object media-object--shared"></span></div>
+      <div class="shell split-section split-section--compact">
+        <div class="section-intro"><p class="eyebrow">Gallery decisions</p><h2>Should you hide images from other variants?</h2></div>
+        <div class="section-copy"><p>For products with large galleries, showing every image at once can make the product page harder to scan.</p><p>Filtering the gallery by the selected variant can help reduce unrelated imagery and make the customer's current choice easier to understand.</p><p>However, some product photographs may be useful across every variant. A merchant may still want general lifestyle, sizing or product-detail images to remain visible regardless of the selected option.</p><p>The best setup therefore depends on how the product photography is organised.</p><p class="inline-link">Read more about how to <a href="/hide-other-variant-images-shopify">hide other variant images in Shopify</a>.</p></div>
+      </div>
+    </section>
+
+    <section class="guide-section guide-section--soft" id="theme-compatibility">
+      <div class="shell split-section split-section--compact">
+        <div class="section-intro"><p class="eyebrow">Theme support</p><h2>Variant images and Shopify themes</h2></div>
+        <div class="section-copy"><p>Shopify themes do not all structure product galleries and variant selectors in exactly the same way.</p><p>The theme can therefore affect how variant-image functionality interacts with the storefront.</p><p>Before relying on any gallery-changing solution, it is worth confirming that it works correctly with the theme being used and testing the experience across desktop and mobile.</p><p class="inline-link">Check <a href="/theme-compatibility">VariantLens theme compatibility</a>.</p></div>
+      </div>
+      <div class="shell theme-strip"><strong>Theme guides</strong><span>Dawn <small>Coming soon</small></span><span>Horizon <small>Coming soon</small></span><span>Sense <small>Coming soon</small></span></div>
+    </section>
+
+    <section class="guide-section guide-section--white" id="using-variantlens">
+      <div class="shell">
+        <div class="section-intro section-intro--wide"><p class="eyebrow">Using VariantLens</p><h2>A simpler way to control variant galleries</h2><p>VariantLens is built around a simple idea: the merchant should be able to decide which product images belong to each variant.</p><p>Instead of editing theme code or automatically guessing which media belongs together, VariantLens uses a manual visual assignment workflow.</p></div>
+        <div class="workflow-and-screenshot">
+          <ol class="workflow"><li><span>01</span>Selects a product</li><li><span>02</span>Chooses a variant</li><li><span>03</span>Assigns the relevant product images</li><li><span>04</span>Saves the setup</li></ol>
+          <div class="admin-screenshot" aria-label="VariantLens workspace showing product variants and assigned Shopify images">
+            <img src="/assets/brand/variantlens-workspace-screenshot.png" alt="VariantLens workspace showing product variants and assigned Shopify images" width="2682" height="1306" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <p class="supporting-statement">Manual control means the merchant remains in charge of exactly which images are assigned to each variant.</p>
+        <a class="button guide-button" href="https://apps.shopify.com/variantlens">View VariantLens on Shopify <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="guide-section guide-section--soft" id="comparison">
+      <div class="shell section-intro section-intro--wide comparison-intro"><p class="eyebrow">The outcome</p><h2>What a cleaner variant gallery looks like</h2></div>
+      <div class="shell comparison-graphic">
+        <img src="/assets/brand/variant-gallery-before-after.png" alt="Before and after comparison showing mixed product images versus a focused Black variant gallery" width="1602" height="555" loading="lazy" decoding="async" />
+        <p class="comparison-subline">Reduce returns. Increase conversion. Present your product page as it deserves to be presented.</p>
+      </div>
+    </section>
+
+    <section class="guide-section guide-section--white" id="related-guides">
+      <div class="shell section-intro section-intro--wide"><p class="eyebrow">Keep reading</p><h2>Related guides</h2></div>
+      <div class="shell related-grid">
+        {relatedGuides.map((guide) => <a class="related-card" href={guide.href}><span aria-hidden="true">&rarr;</span><h3>{guide.title}</h3><p>{guide.description}</p><strong>Read guide</strong></a>)}
+      </div>
+      <div class="shell browse-guides"><a href="/guides">Browse all guides <span aria-hidden="true">&rarr;</span></a></div>
+    </section>
+
+    <section class="guide-section guide-section--soft" id="faq">
+      <div class="shell faq-layout"><div class="section-intro"><p class="eyebrow">FAQ</p><h2>Frequently asked questions</h2></div><div class="faq-list">{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{question.startsWith("Do variant") ? <>Theme implementations differ, so compatibility should always be checked before relying on a variant gallery solution. VariantLens maintains a separate <a href="/theme-compatibility">theme compatibility page</a> for this purpose.</> : answer}</p></details>)}</div></div>
+    </section>
+
+    <WaveDivider topColor="#f0f1f8" bottomColor="#20212a" />
+    <section class="guide-final-cta"><div class="shell guide-final-cta__inner"><div><p class="eyebrow">Manual variant image control</p><h2>Show customers the images that match their selection.</h2><p>VariantLens gives Shopify merchants manual control over which product images appear for each variant.</p></div><div class="guide-final-cta__actions"><a class="button" href="https://apps.shopify.com/variantlens">View VariantLens on Shopify <span aria-hidden="true">&rarr;</span></a><a href="/guides">Explore more guides</a></div></div></section>
+  </div>
+</BaseLayout>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer }
+  }))
+})} />
+
+<script>
+  const storefrontImageSets = {
+    black: [
+      "/assets/guides/storefront-shirts/black-1.png",
+      "/assets/guides/storefront-shirts/black-2.png",
+      "/assets/guides/storefront-shirts/black-3.png",
+      "/assets/guides/storefront-shirts/black-4.png"
+    ],
+    blue: [
+      "/assets/guides/storefront-shirts/blue-1.png",
+      "/assets/guides/storefront-shirts/blue-2.png",
+      "/assets/guides/storefront-shirts/blue-3.png",
+      "/assets/guides/storefront-shirts/blue-4.png"
+    ],
+    green: [
+      "/assets/guides/storefront-shirts/green-1.png",
+      "/assets/guides/storefront-shirts/green-2.png",
+      "/assets/guides/storefront-shirts/green-3.png",
+      "/assets/guides/storefront-shirts/green-4.png"
+    ]
+  } as const;
+
+  const storefrontCards = document.querySelectorAll<HTMLElement>(".storefront-card");
+
+  storefrontCards.forEach((card) => {
+    let activeVariant: keyof typeof storefrontImageSets = "black";
+    const activeImageIndex = 3;
+    let renderId = 0;
+    const mainImage = card.querySelector<HTMLImageElement>("[data-storefront-main]");
+    const gallery = card.querySelector<HTMLElement>("[data-storefront-gallery]");
+    const buttons = card.querySelectorAll<HTMLButtonElement>("[data-variant-option]");
+
+    const preloadImages = (sources: readonly string[]) => Promise.all(sources.map((source) => new Promise<void>((resolve) => {
+      const image = new Image();
+      image.addEventListener("load", () => resolve(), { once: true });
+      image.addEventListener("error", () => resolve(), { once: true });
+      image.src = source;
+    })));
+
+    const applyStorefrontSources = () => {
+      const images = storefrontImageSets[activeVariant];
+      const variantLabel = activeVariant[0].toUpperCase() + activeVariant.slice(1);
+
+      if (mainImage) {
+        mainImage.src = images[activeImageIndex];
+        mainImage.alt = `${variantLabel} T-shirt image ${activeImageIndex + 1}`;
+      }
+
+      gallery?.setAttribute("aria-label", `${variantLabel} product gallery`);
+      card.querySelectorAll<HTMLElement>("[data-thumbnail-index]").forEach((thumbnail, index) => {
+        const image = thumbnail.querySelector("img");
+        if (image) {
+          image.src = images[index];
+          image.alt = `${variantLabel} T-shirt image ${index + 1}`;
+        }
+      });
+    };
+
+    const renderStorefront = async () => {
+      const currentRenderId = ++renderId;
+      const images = storefrontImageSets[activeVariant];
+      await preloadImages([...images.slice(0, 3), images[activeImageIndex]]);
+      if (currentRenderId !== renderId) return;
+
+      card.classList.add("is-transitioning");
+      await new Promise((resolve) => window.setTimeout(resolve, 120));
+      if (currentRenderId !== renderId) return;
+
+      applyStorefrontSources();
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => card.classList.remove("is-transitioning")));
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const variant = button.dataset.variantOption as keyof typeof storefrontImageSets | undefined;
+        if (!variant || !storefrontImageSets[variant]) return;
+        activeVariant = variant;
+        card.dataset.variant = activeVariant;
+        card.querySelectorAll("[data-variant-option]").forEach((option) => {
+          const isActive = (option as HTMLElement).dataset.variantOption === activeVariant;
+          option.classList.toggle("is-active", isActive);
+          option.setAttribute("aria-pressed", String(isActive));
+        });
+        void renderStorefront();
+      });
+    });
+
+  });
+</script>
+
+<style>
+  .guide-page{background:#f8f8fb;color:#171820}.guide-hero{padding:clamp(155px,18vw,220px) 0 76px;background:#fff}.guide-hero__inner{max-width:var(--max);text-align:center}.guide-hero h1{max-width:1000px;margin:18px auto 24px;font-size:clamp(2.15rem,4vw,3.65rem);letter-spacing:-.055em;line-height:1.04}.guide-hero__intro{max-width:760px;margin:0 auto 15px;color:var(--muted);font-size:1.08rem;line-height:1.7}.guide-toc{max-width:780px;margin:47px auto 0;padding:23px 25px;text-align:left;border:1px solid #e1e3ec;border-radius:15px;background:#f8f8fb}.guide-toc>p{margin:0 0 14px;color:#4c5f9d;font-size:.72rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase}.guide-toc__links{display:flex;flex-wrap:wrap;gap:8px 24px}.guide-toc a,.inline-link a,.browse-guides a{color:#4c60a0;font-weight:750;text-underline-offset:4px}.guide-section{padding:94px 0}.guide-section--white{background:#fff}.guide-section--soft{background:#f0f1f8}.section-intro{max-width:570px}.section-intro--wide{max-width:750px}.section-intro h2{margin:10px 0 23px;font-size:clamp(2.15rem,4vw,3.6rem);letter-spacing:-.055em;line-height:1.04}.section-intro>p:not(.eyebrow),.section-copy p{color:var(--muted);line-height:1.7}.section-copy p{margin:0 0 16px}.section-copy p:last-child{margin-bottom:0}.problem-visual{position:relative;margin-top:52px;padding:31px 38px 37px;border:1px solid #dfe2ec;border-radius:22px;background:#fff;box-shadow:0 20px 48px rgba(53,62,110,.08)}.visual-label{position:absolute;top:-13px;left:28px;padding:4px 11px;border-radius:999px;background:#6879bc;color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.04em}.problem-visual__bar{display:flex;justify-content:space-between;gap:15px;margin-bottom:24px;color:#4f5f98}.problem-visual__bar span{color:#757c91;font-size:.82rem}.problem-visual__main{display:grid;grid-template-columns:minmax(0,1fr) 1.5fr;gap:34px;align-items:center}.product-shape{position:relative;width:min(220px,70%);aspect-ratio:1.1;margin:auto;border-radius:38% 38% 22% 22%;background:#20222d;box-shadow:inset 0 -16px 0 rgba(0,0,0,.12)}.product-shape:before,.product-shape:after{content:"";position:absolute;top:10%;width:26%;height:45%;border-radius:50% 50% 20% 20%;background:inherit}.product-shape:before{left:-17%;transform:rotate(20deg)}.product-shape:after{right:-17%;transform:rotate(-20deg)}.problem-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.thumb{display:block;aspect-ratio:1;background:#272a38;border-radius:11px;box-shadow:0 7px 15px rgba(45,52,86,.1)}.thumb--blue{background:#6e88b6}.thumb--tortoise{background:#9b7256}.inline-link{margin:24px 0 0;color:var(--muted);line-height:1.6}.split-section{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(52px,9vw,125px);align-items:start}.split-section--compact{align-items:center}.simple-list{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 18px;padding:0;list-style:none}.simple-list li{padding:6px 12px;border-radius:999px;background:#eef0fa;color:#4d5e97;font-size:.83rem;font-weight:750}.variant-map{padding:30px;border:1px solid #dde1ed;border-radius:19px;background:#fff;box-shadow:0 16px 40px rgba(54,64,111,.07)}.variant-map__product{display:grid;min-height:78px;place-items:center;border-radius:12px;background:#f0f2fa;color:#4c5e9d;font-size:1.1rem;font-weight:800}.variant-map__line{width:1px;height:30px;margin:auto;background:#b3bcdf}.variant-map__rows{display:grid;gap:10px}.variant-map__rows div{display:grid;grid-template-columns:1fr auto 1.25fr;align-items:center;gap:13px;padding:14px 15px;border-radius:10px;background:#f8f8fb}.variant-map__rows strong{font-size:.9rem}.variant-map__rows span{color:#6074b7;font-size:1.2rem}.variant-map__rows em{color:#66708a;font-size:.88rem;font-style:normal}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}.info-grid article{padding:25px;border-radius:16px;background:#fff;box-shadow:0 13px 32px rgba(53,62,110,.07)}.info-grid article>span{color:#5c70b0;font-size:.7rem;font-weight:850;letter-spacing:.1em}.info-grid h3{margin:20px 0 10px;font-size:1.13rem;letter-spacing:-.025em}.info-grid p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.62}.split-section--colour{align-items:center}.colour-example{display:grid;gap:14px}.colour-row{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:14px;padding:16px;border:1px solid #e1e3ec;border-radius:15px;background:#fff}.colour-row>strong{color:#414b76}.colour-row>div{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mini-product{position:relative;display:block;aspect-ratio:1.1;border-radius:9px;background:#222531}.mini-product:before,.mini-product:after{content:"";position:absolute;top:13%;width:25%;height:45%;border-radius:50% 50% 20% 20%;background:inherit}.mini-product:before{left:-15%;transform:rotate(18deg)}.mini-product:after{right:-15%;transform:rotate(-18deg)}.mini-product--side{transform:scale(.82) rotate(8deg);background:#333747}.mini-product--lifestyle{transform:scale(.82) rotate(-6deg);background:#59627c}.mini-product--green{background:#71866e}.mini-product--green.mini-product--side{background:#82927b}.mini-product--green.mini-product--lifestyle{background:#9ca98f}.theme-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:43px}.theme-strip>strong{margin-right:auto;color:#4b5e9c;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}.theme-strip>span{padding:9px 13px;border:1px solid #d8ddec;border-radius:999px;background:#fff;color:#39446d;font-size:.82rem;font-weight:750}.theme-strip small{margin-left:4px;color:#858ca0;font-size:.65rem;font-weight:600}.workflow-and-screenshot{display:grid;grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr);gap:28px;align-items:stretch;margin-top:44px}.workflow{display:grid;gap:10px;margin:0;padding:0;list-style:none}.workflow li{display:flex;align-items:center;gap:14px;padding:16px;border-radius:12px;background:#f0f1f8;color:#404b76;font-weight:700}.workflow span{display:grid;width:28px;height:28px;place-items:center;border-radius:50%;background:#687bc1;color:#fff;font-size:.68rem}.admin-placeholder{display:grid;min-height:270px;align-content:center;justify-items:center;gap:10px;padding:34px;border:1px dashed #aeb8dc;border-radius:19px;background:linear-gradient(145deg,#f0f2fb,#fff);text-align:center}.admin-placeholder span{color:#5b6daa;font-size:.73rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.admin-placeholder strong{font-size:1.35rem;letter-spacing:-.035em}.admin-placeholder small{max-width:360px;color:#727b92;line-height:1.5}.supporting-statement{max-width:680px;margin:27px 0 21px;color:#4d5e98;font-weight:750}.guide-button{gap:9px}.comparison-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.comparison-card{padding:28px;border-radius:19px;background:#fff;box-shadow:0 15px 35px rgba(53,62,110,.08)}.comparison-card--after{background:#eef0fa}.comparison-label{display:inline-flex;padding:6px 11px;border-radius:999px;background:#e6e8f5;color:#5266a3;font-size:.68rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.comparison-card h3{margin:22px 0 18px;font-size:1.15rem}.comparison-media{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:19px}.comparison-card--after .comparison-media{grid-template-columns:repeat(3,1fr)}.comparison-media i{position:relative;display:block;aspect-ratio:1;background:#252935;border-radius:8px}.comparison-media i:before,.comparison-media i:after{content:"";position:absolute;top:17%;width:24%;height:43%;border-radius:50% 50% 20% 20%;background:inherit}.comparison-media i:before{left:-14%;transform:rotate(20deg)}.comparison-media i:after{right:-14%;transform:rotate(-20deg)}.comparison-media i.is-other:nth-child(3){background:#7892bd}.comparison-media i.is-other:nth-child(4){background:#9b7256}.comparison-media i.is-other:nth-child(5){background:#7892bd}.comparison-card p{margin:0;color:#66708a;font-size:.9rem;line-height:1.6}.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.related-card{display:flex;min-height:235px;flex-direction:column;padding:24px;border:1px solid #e1e3ec;border-radius:16px;background:#fff;color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.related-card:hover,.related-card:focus-visible{border-color:#abb7df;box-shadow:0 15px 35px rgba(53,62,110,.08);transform:translateY(-3px)}.related-card>span{align-self:flex-end;color:#5d71b0;font-size:1.25rem}.related-card h3{margin:26px 0 10px;font-size:1.16rem;line-height:1.15}.related-card p{margin:0;color:#66708a;font-size:.9rem;line-height:1.58}.related-card strong{margin-top:auto;padding-top:22px;color:#4c60a0;font-size:.84rem}.browse-guides{margin-top:28px}.browse-guides a{text-decoration:none}.faq-layout{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:75px}.faq-list{border-top:1px solid #d9dce8}.faq-list details{padding:20px 0;border-bottom:1px solid #d9dce8}.faq-list summary{cursor:pointer;font-weight:760}.faq-list p{max-width:700px;margin:13px 0 0;color:#66708a;line-height:1.65}.faq-list a{color:#4c60a0;font-weight:700}.guide-final-cta{padding:86px 0;background:#20212a;color:#fff}.guide-final-cta__inner{display:flex;align-items:center;justify-content:space-between;gap:55px}.guide-final-cta h2{max-width:690px;margin:10px 0 15px;color:#fff;font-size:clamp(2.2rem,4vw,3.8rem);letter-spacing:-.055em;line-height:1.02}.guide-final-cta p:last-child{max-width:620px;margin:0;color:#c8c9d1;line-height:1.65}.guide-final-cta .eyebrow{color:#bfc6ed}.guide-final-cta__actions{display:flex;align-items:center;flex:0 0 auto;gap:22px;flex-wrap:wrap}.guide-final-cta__actions a:last-child{color:#dfe2f1;font-weight:700;text-underline-offset:4px}.guide-final-cta .button{display:inline-flex;align-items:center;gap:8px}
+  @media(max-width:800px){.guide-section{padding:70px 0}.split-section,.faq-layout{grid-template-columns:1fr;gap:38px}.info-grid,.related-grid{grid-template-columns:1fr}.workflow-and-screenshot{grid-template-columns:1fr}.guide-final-cta__inner{align-items:flex-start;flex-direction:column;gap:30px}.problem-visual__main{gap:20px}.section-intro h2{font-size:clamp(2rem,8vw,3rem)}}
+  @media(max-width:560px){.guide-hero{padding-top:120px}.guide-hero__intro{font-size:1rem}.guide-toc{margin-top:35px;padding:19px}.guide-toc__links{display:grid;gap:9px}.guide-section{padding:58px 0}.problem-visual{padding:26px 18px 23px}.problem-visual__main{grid-template-columns:1fr;gap:25px}.product-shape{width:130px}.problem-thumbs{gap:7px}.variant-map{padding:18px}.colour-row{grid-template-columns:1fr}.comparison-grid{grid-template-columns:1fr}.theme-strip{display:grid;grid-template-columns:repeat(2,1fr)}.theme-strip>strong{grid-column:1/-1}.theme-strip>span{text-align:center}.guide-final-cta__actions{align-items:stretch;flex-direction:column;width:100%}.guide-final-cta__actions .button{width:100%}}
+</style>
+
+<style>
+  .product-shape {
+    width: min(300px, 90%);
+    aspect-ratio: 1.28;
+    border: 1px solid #e1e3eb;
+    border-radius: 14px;
+    background-color: #f6f6fa;
+    background-image: url('/assets/brand/mixed-slate-storefront-gallery.webp');
+    background-repeat: no-repeat;
+    background-position: center 13%;
+    background-size: 210% auto;
+    box-shadow: 0 15px 28px rgba(45, 52, 86, .14);
+  }
+
+  .product-shape::before,
+  .product-shape::after { display: none; }
+
+  .thumb {
+    border: 1px solid #e1e3eb;
+    background-color: #f6f6fa;
+    background-image: url('/assets/brand/mixed-slate-storefront-gallery.webp');
+    background-repeat: no-repeat;
+    background-size: 760% auto;
+    box-shadow: 0 8px 17px rgba(45, 52, 86, .12);
+  }
+
+  .thumb:nth-child(1) { background-position: 2% 94%; }
+  .thumb:nth-child(2) { background-position: 18% 94%; }
+  .thumb:nth-child(3) { background-position: 78% 94%; }
+  .thumb:nth-child(4) { background-position: 96% 94%; }
+  .thumb--blue,
+  .thumb--tortoise { background-color: #f6f6fa; }
+
+  .product-shape { overflow: hidden; background-image: none; }
+  .product-shape img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 17%; }
+
+  @media (max-width: 560px) {
+    .product-shape { width: min(260px, 78%); }
+  }
+</style>
+
+<style>
+  .guide-page { background: #fff; }
+  .guide-hero { padding: clamp(132px, 15vw, 190px) 0 74px; border-bottom: 1px solid #e4e5ea; }
+  .guide-hero__inner { max-width: var(--max); }
+  .guide-hero h1 { max-width: 920px; font-size: clamp(2rem, 3.8vw, 3.55rem); }
+  .guide-hero__intro { max-width: 780px; font-size: 1.18rem; line-height: 1.78; }
+  .guide-toc { max-width: 820px; margin-top: 38px; padding: 18px 0; border: 0; border-top: 1px solid #dfe1e7; border-bottom: 1px solid #dfe1e7; border-radius: 0; background: transparent; }
+  .guide-toc__links { gap: 7px 27px; }
+  .guide-toc a { font-size: .9rem; }
+  .guide-section, .guide-section--white, .guide-section--soft { padding: clamp(82px, 10vw, 128px) 0; background: #fff; }
+  .guide-section + .guide-section { border-top: 1px solid #ececf0; }
+  .section-intro, .section-intro--wide { max-width: 800px; }
+  .section-intro h2 { max-width: 780px; font-size: clamp(2rem, 3.4vw, 3.15rem); }
+  .section-intro > p:not(.eyebrow), .section-copy p, .section-intro--wide > p:not(.eyebrow) { font-size: 1.08rem; line-height: 1.8; }
+  .section-copy { max-width: 790px; }
+  .split-section { grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(58px, 9vw, 130px); }
+  .problem-visual { max-width: 1080px; margin: 58px auto 0; padding: 0; overflow: hidden; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .problem-visual__image { display: block; width: 100%; height: auto; }
+  .variant-map { max-width: 760px; margin-left: auto; border: 0; border-top: 1px solid #dfe1e7; border-bottom: 1px solid #dfe1e7; border-radius: 0; box-shadow: none; }
+  .storefront-flow { max-width: 760px; margin-left: auto; overflow: hidden; border: 1px solid #dfe1e7; border-radius: 18px; background: #fff; box-shadow: 0 18px 42px rgba(32, 38, 56, .07); }
+  .storefront-flow__heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 17px 20px; border-bottom: 1px solid #e4e5ea; color: #4f609a; font-size: .76rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .storefront-flow__heading small { color: #858b9c; font-size: .68rem; font-weight: 650; letter-spacing: 0; text-transform: none; }
+  .storefront-state { padding: 18px 20px 20px; }
+  .storefront-state + .storefront-state { border-top: 1px solid #e4e5ea; }
+  .storefront-state__meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .storefront-state__meta span { color: #6476b3; font-size: .66rem; font-weight: 850; letter-spacing: .1em; }
+  .storefront-state__meta strong { font-size: .88rem; letter-spacing: -.01em; }
+  .storefront-state__panel { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 17px; align-items: center; }
+  .storefront-state__product { display: grid; min-height: 110px; place-items: center; overflow: hidden; border: 1px solid #e1e3eb; border-radius: 11px; background: #f8f8fa; }
+  .storefront-shirt { position: relative; display: block; width: 72px; height: 83px; clip-path: polygon(25% 8%, 38% 0, 62% 0, 75% 8%, 100% 27%, 84% 43%, 74% 35%, 74% 100%, 26% 100%, 26% 35%, 16% 43%, 0 27%); background: #242833; box-shadow: inset 0 -9px 0 rgba(0, 0, 0, .12); }
+  .storefront-shirt::before { content: ""; position: absolute; top: 3px; left: 36%; width: 28%; height: 12px; border: 3px solid rgba(255,255,255,.13); border-radius: 50%; }
+  .storefront-state--blue .storefront-shirt { background: #6986b7; box-shadow: inset 0 -9px 0 rgba(35, 53, 89, .16); }
+  .storefront-state--tortoise .storefront-shirt { background: #9a7051; box-shadow: inset 0 -9px 0 rgba(73, 42, 25, .14); }
+  .storefront-state__controls { display: grid; gap: 12px; }
+  .variant-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .variant-chips b { padding: 6px 9px; border: 1px solid #dfe2eb; border-radius: 999px; color: #737a8d; background: #fff; font-size: .66rem; font-weight: 700; }
+  .variant-chips b.is-active { border-color: #7182bf; color: #43579e; background: #eef1ff; }
+  .storefront-thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  .storefront-thumbs i { position: relative; display: block; min-height: 48px; overflow: hidden; border: 1px solid #e0e2ea; border-radius: 7px; background: #f5f6fa; }
+  .storefront-thumbs i::before { content: ""; position: absolute; left: 50%; top: 50%; width: 29px; height: 34px; clip-path: polygon(25% 8%, 38% 0, 62% 0, 75% 8%, 100% 27%, 84% 43%, 74% 35%, 74% 100%, 26% 100%, 26% 35%, 16% 43%, 0 27%); background: #242833; transform: translate(-50%, -50%); }
+  .storefront-state--blue .storefront-thumbs i::before { background: #6986b7; }
+  .storefront-state--tortoise .storefront-thumbs i::before { background: #9a7051; }
+  .storefront-thumbs i:nth-child(2)::before { transform: translate(-50%, -50%) scale(.82) rotate(6deg); opacity: .84; }
+  .storefront-thumbs i:nth-child(3)::before { transform: translate(-50%, -50%) scale(.72) rotate(-7deg); opacity: .68; }
+  .storefront-card { width: 100%; max-width: 640px; margin-left: 0; padding: 20px; overflow: hidden; border: 1px solid #dfe1e7; border-radius: 18px; background: #fff; box-shadow: 0 20px 46px rgba(32, 38, 56, .08); }
+  .storefront-card__heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; color: #4f609a; font-size: .73rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+  .storefront-card__heading small { color: #858b9c; font-size: .72rem; font-weight: 650; letter-spacing: 0; text-transform: none; }
+  .storefront-card__image { display: grid; height: 196px; place-items: center; overflow: hidden; padding: 8px; border: 1px solid #e1e3eb; border-radius: 12px; background: #f8f8fb; box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
+  .storefront-card__image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; transition: opacity 180ms ease, transform 220ms ease; }
+  .storefront-card__selector { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0 13px; }
+  .storefront-card__selector button { padding: 9px 15px; border: 1px solid #dfe2eb; border-radius: 999px; color: #626a7d; background: #fff; box-shadow: 0 3px 8px rgba(42,49,78,.06); font: inherit; font-size: .76rem; font-weight: 750; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+  .storefront-card__selector button:hover { border-color: #b5bfdf; box-shadow: 0 9px 18px rgba(52,63,108,.14); transform: translateY(-3px); }
+  .storefront-card__selector button.is-active { border-color: #8c9bd0; color: #42569d; background: #eef1ff; box-shadow: 0 5px 12px rgba(79,96,154,.14); }
+  .storefront-card__gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+  .storefront-card__gallery span { display: grid; aspect-ratio: 1; min-width: 0; place-items: center; overflow: hidden; padding: 5px; border: 1px solid #e0e2ea; border-radius: 9px; background: #f8f8fb; box-shadow: 0 7px 15px rgba(45,52,86,.06); }
+  .storefront-card__gallery img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; transition: opacity 180ms ease, transform 220ms ease; }
+  .storefront-card.is-transitioning .storefront-card__image img,
+  .storefront-card.is-transitioning .storefront-card__gallery img { opacity: 0; transform: scale(.985); }
+  @media (prefers-reduced-motion: reduce) {
+    .storefront-card__image img,
+    .storefront-card__gallery img { transition: none; }
+  }
+  .variant-map__rows div { border-bottom: 1px solid #e5e6eb; border-radius: 0; background: transparent; }
+  .variant-map__rows div:last-child { border-bottom: 0; }
+  .info-grid { display: block; max-width: 820px; margin-top: 38px; }
+  .info-grid article { display: grid; grid-template-columns: 54px minmax(0, 1fr); column-gap: 18px; align-items: start; padding: 22px 0; border-top: 1px solid #dfe1e7; border-radius: 0; background: transparent; box-shadow: none; }
+  .info-grid article:last-child { border-bottom: 1px solid #dfe1e7; }
+  .info-grid article > span { grid-row: 1 / span 2; padding-top: 4px; font-size: .78rem; }
+  .info-grid h3 { margin: 0 0 7px; font-size: 1.22rem; }
+  .info-grid p { font-size: 1rem; line-height: 1.7; }
+  .ways-panel { padding: clamp(28px, 4vw, 52px); border: 1px solid #e3e5ec; border-radius: 24px; background: #f6f7fa; box-shadow: 0 22px 52px rgba(40,48,82,.08); }
+  .ways-panel .section-intro { max-width: 850px; }
+  .ways-panel .info-grid { max-width: none; margin-top: 38px; }
+  .ways-panel .info-grid article { margin-bottom: 14px; padding: 24px 26px; border: 0; border-radius: 15px; background: #fff; box-shadow: 0 8px 22px rgba(42,50,82,.06); transition: box-shadow 190ms ease, transform 190ms ease; }
+  .ways-panel .info-grid article:last-child { margin-bottom: 0; border-bottom: 0; }
+  .ways-panel .info-grid article:hover { box-shadow: 0 16px 32px rgba(48,58,98,.12); transform: translateY(-3px); }
+  .colour-example { max-width: 760px; margin-left: auto; }
+  .colour-example--graphic { display: block; max-width: 760px; }
+  .colour-example--graphic img { display: block; width: 100%; height: auto; border: 0; border-radius: 0; box-shadow: none; }
+  .colour-row { border: 0; border-top: 1px solid #dfe1e7; border-radius: 0; padding: 20px 0; }
+  .colour-row:last-child { border-bottom: 1px solid #dfe1e7; }
+  .theme-strip { max-width: 820px; margin-top: 38px; padding-top: 18px; border-top: 1px solid #dfe1e7; }
+  .theme-strip > span { border: 1px solid #dfe1e7; background: #fff; }
+  .workflow-and-screenshot { grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr); gap: 48px; }
+  .workflow { align-content: start; gap: 0; }
+  .workflow li { padding: 17px 0; border-top: 1px solid #dfe1e7; border-radius: 0; background: transparent; font-size: 1rem; }
+  .workflow li:last-child { border-bottom: 1px solid #dfe1e7; }
+  .workflow span { background: #6270af; }
+  .admin-placeholder { min-height: 360px; border: 1px dashed #aeb8dc; border-radius: 18px; box-shadow: 0 20px 48px rgba(32, 38, 56, .08); }
+  .admin-screenshot { overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .admin-screenshot img { display: block; width: 100%; height: auto; }
+  .comparison-grid { max-width: 1080px; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .comparison-graphic { max-width: 1200px; }
+  .comparison-graphic img { display: block; width: 100%; height: auto; }
+  .comparison-intro { max-width: 1200px; margin-left: auto; margin-right: auto; text-align: center; }
+  .comparison-intro h2 { max-width: 1200px; margin-left: auto; margin-right: auto; font-size: clamp(2.1rem, 3.2vw, 3.25rem); }
+  .comparison-subline { margin: 26px auto 0; color: var(--muted); font-size: 1.05rem; line-height: 1.65; text-align: center; }
+  .guide-section--logo-gradient { background: radial-gradient(circle at 12% 18%, rgba(104, 126, 220, .18), transparent 42%), radial-gradient(circle at 88% 82%, rgba(112, 78, 232, .14), transparent 44%), linear-gradient(135deg, #f7f8ff 0%, #eef2ff 52%, #f8f6ff 100%); }
+  .guide-section--logo-gradient { position: relative; overflow: hidden; }
+  .guide-section--logo-gradient > .shell { position: relative; z-index: 1; }
+  .hiding-images-bg { position: absolute; inset: 0; pointer-events: none; }
+  .media-object { position: absolute; display: block; width: 150px; aspect-ratio: 1.2; border: 1px solid rgba(78, 98, 172, .34); border-radius: 14px; background: rgba(255, 255, 255, .42); box-shadow: 0 18px 35px rgba(74, 93, 160, .12); opacity: var(--media-max, .78); filter: blur(.2px); animation: media-object-pulse var(--pulse-duration, 7s) ease-in-out infinite var(--pulse-delay, 0s); }
+  .media-object::after { content: ""; position: absolute; inset: 18% 16%; border-radius: 9px; background: linear-gradient(135deg, rgba(100, 122, 202, .24), rgba(255, 255, 255, .32)); }
+  .media-object--large { top: 14%; right: 5%; width: 230px; transform: rotate(8deg); --media-max: .58; --pulse-duration: 8.4s; --pulse-delay: -2.1s; }
+  .media-object--small { top: 58%; left: 3%; width: 120px; transform: rotate(-10deg); --media-max: .64; --pulse-duration: 6.7s; --pulse-delay: -.8s; }
+  .media-object--tilted { bottom: 10%; right: 22%; width: 110px; transform: rotate(-16deg); --media-max: .5; --pulse-duration: 9.2s; --pulse-delay: -4.3s; }
+  .media-object--shared { top: 23%; left: 39%; width: 82px; transform: rotate(6deg); --media-max: .42; --pulse-duration: 7.6s; --pulse-delay: -5.5s; }
+  @keyframes media-object-pulse { 0%, 100% { opacity: 0; } 50% { opacity: var(--media-max, .78); } }
+  @media (prefers-reduced-motion: reduce) { .media-object { animation: none; opacity: var(--media-max, .78); } }
+  .comparison-card, .comparison-card--after { padding: 30px; border: 1px solid #e0e2e8; border-radius: 18px; background: #fff; box-shadow: 0 16px 38px rgba(32, 38, 56, .06); }
+  .comparison-card--after { background: #f8f8fb; }
+  .comparison-card h3 { font-size: 1.18rem; }
+  .comparison-card p, .related-card p { font-size: .98rem; line-height: 1.7; }
+  .related-grid { max-width: 1080px; }
+  #related-guides > .section-intro { max-width: 1080px; margin-left: auto; margin-right: auto; }
+  .browse-guides { max-width: 1080px; margin: 28px auto 0; }
+  .browse-guides a { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border: 1px solid #dce0eb; border-radius: 10px; background: #fff; box-shadow: 0 8px 20px rgba(42, 52, 91, .06); text-decoration: none; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+  .browse-guides a:hover, .browse-guides a:focus-visible { border-color: #aab7df; box-shadow: 0 12px 24px rgba(42, 52, 91, .1); transform: translateY(-2px); }
+  .related-card { min-height: 218px; border-color: #e0e2e8; border-radius: 15px; box-shadow: none; }
+  .related-card:hover, .related-card:focus-visible { box-shadow: 0 14px 30px rgba(32, 38, 56, .07); }
+  .faq-layout { grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: 90px; }
+  .faq-list { max-width: 800px; }
+  .faq-list details { padding: 23px 0; }
+  .faq-list summary { font-size: 1.08rem; }
+  .faq-list p { font-size: 1rem; line-height: 1.72; }
+  .guide-final-cta { padding: 80px 0; }
+  @media (max-width: 800px) {
+    .guide-hero { padding-top: 112px; }
+    .guide-section, .guide-section--white, .guide-section--soft { padding: 70px 0; }
+    .split-section { grid-template-columns: 1fr; gap: 40px; }
+    .colour-example, .variant-map, .storefront-flow { margin-left: 0; }
+    .info-grid article { grid-template-columns: 42px minmax(0, 1fr); }
+    .workflow-and-screenshot { grid-template-columns: 1fr; gap: 32px; }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .faq-layout { grid-template-columns: 1fr; gap: 38px; }
+  }
+  @media (max-width: 560px) {
+    .guide-hero { padding-top: 104px; }
+    .guide-hero__intro { font-size: 1.05rem; }
+    .guide-toc { margin-top: 30px; }
+    .guide-toc__links { gap: 9px; }
+    .section-intro > p:not(.eyebrow), .section-copy p, .section-intro--wide > p:not(.eyebrow) { font-size: 1rem; }
+    .problem-visual { margin-top: 42px; padding: 24px 18px 26px; }
+    .comparison-card { padding: 23px; }
+    .storefront-state__panel { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; }
+    .storefront-state__product { min-height: 96px; }
+    .ways-panel { padding: 22px 16px; border-radius: 18px; }
+    .ways-panel .info-grid article { padding: 20px 18px; }
+  }
+</style>
