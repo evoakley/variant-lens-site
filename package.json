@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.2.6"
+    "astro": "7.2.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^5.9.2"
+    "@astrojs/cloudflare": "14.3.0",
+    "typescript": "^5.9.2",
+    "wrangler": "4.129.1"
   }
 }
