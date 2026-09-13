@@ -23,17 +23,17 @@ const faqs = [
 
 const relatedGuides = [
   {
-    href: "/show-only-selected-variant-images-shopify",
+    href: "/show-only-selected-variant-images-shopify/",
     title: "Show Only Selected Variant Images",
     description: "Learn how to keep Shopify galleries focused on the variant a customer selects."
   },
   {
-    href: "/shopify-variant-images-by-color",
+    href: "/shopify-variant-images-by-color/",
     title: "Variant Images by Colour",
     description: "Organise Shopify product galleries around colour-specific product images."
   },
   {
-    href: "/hide-other-variant-images-shopify",
+    href: "/hide-other-variant-images-shopify/",
     title: "Hide Other Variant Images",
     description: "Understand how to remove unrelated colours and styles from the active variant gallery."
   }
@@ -81,7 +81,7 @@ const relatedGuides = [
         <div class="problem-visual" aria-label="Black selected while blue and green T-shirt images remain visible in the product gallery">
           <img class="problem-visual__image" src="/assets/brand/variant-image-problem-tshirts.png" alt="Black selected while blue and green T-shirt images remain visible in the product gallery" width="2030" height="774" loading="lazy" decoding="async" />
         </div>
-        <p class="inline-link">If this is the issue you are trying to solve, read our guide on how to <a href="/show-only-selected-variant-images-shopify">show only the selected variant images</a> in Shopify.</p>
+        <p class="inline-link">If this is the issue you are trying to solve, read our guide on how to <a href="/show-only-selected-variant-images-shopify/">show only the selected variant images</a> in Shopify.</p>
       </div>
     </section>
 
@@ -146,14 +146,14 @@ const relatedGuides = [
           <img src="/assets/brand/variant-images-by-colour.png" alt="Black, Blue and Green product galleries, each with matching product and detail images" width="1448" height="1086" loading="lazy" decoding="async" />
         </div>
       </div>
-      <div class="shell"><p class="inline-link">For a more focused walkthrough, read our guide to <a href="/shopify-variant-images-by-color">Shopify variant images by colour</a>.</p></div>
+      <div class="shell"><p class="inline-link">For a more focused walkthrough, read our guide to <a href="/shopify-variant-images-by-color/">Shopify variant images by colour</a>.</p></div>
     </section>
 
     <section class="guide-section guide-section--logo-gradient" id="hiding-images">
       <div class="hiding-images-bg" aria-hidden="true"><span class="media-object media-object--large"></span><span class="media-object media-object--small"></span><span class="media-object media-object--tilted"></span><span class="media-object media-object--shared"></span></div>
       <div class="shell split-section split-section--compact">
         <div class="section-intro"><p class="eyebrow">Gallery decisions</p><h2>Should you hide images from other variants?</h2></div>
-        <div class="section-copy"><p>For products with large galleries, showing every image at once can make the product page harder to scan.</p><p>Filtering the gallery by the selected variant can help reduce unrelated imagery and make the customer's current choice easier to understand.</p><p>However, some product photographs may be useful across every variant. A merchant may still want general lifestyle, sizing or product-detail images to remain visible regardless of the selected option.</p><p>The best setup therefore depends on how the product photography is organised.</p><p class="inline-link">Read more about how to <a href="/hide-other-variant-images-shopify">hide other variant images in Shopify</a>.</p></div>
+        <div class="section-copy"><p>For products with large galleries, showing every image at once can make the product page harder to scan.</p><p>Filtering the gallery by the selected variant can help reduce unrelated imagery and make the customer's current choice easier to understand.</p><p>However, some product photographs may be useful across every variant. A merchant may still want general lifestyle, sizing or product-detail images to remain visible regardless of the selected option.</p><p>The best setup therefore depends on how the product photography is organised.</p><p class="inline-link">Read more about how to <a href="/hide-other-variant-images-shopify/">hide other variant images in Shopify</a>.</p></div>
       </div>
     </section>
 
@@ -192,7 +192,7 @@ const relatedGuides = [
       <div class="shell related-grid">
         {relatedGuides.map((guide) => <a class="related-card" href={guide.href}><span aria-hidden="true">&rarr;</span><h3>{guide.title}</h3><p>{guide.description}</p><strong>Read guide</strong></a>)}
       </div>
-      <div class="shell browse-guides"><a href="/guides">Browse all guides <span aria-hidden="true">&rarr;</span></a></div>
+      <div class="shell browse-guides"><a href="/guides/">Browse all guides <span aria-hidden="true">&rarr;</span></a></div>
     </section>
 
     <section class="guide-section guide-section--soft" id="faq">
@@ -200,7 +200,7 @@ const relatedGuides = [
     </section>
 
     <WaveDivider topColor="#f0f1f8" bottomColor="#20212a" />
-    <section class="guide-final-cta"><div class="shell guide-final-cta__inner"><div><p class="eyebrow">Manual variant image control</p><h2>Show customers the images that match their selection.</h2><p>VariantLens gives Shopify merchants manual control over which product images appear for each variant.</p></div><div class="guide-final-cta__actions"><a class="button" href="https://apps.shopify.com/variantlens">View VariantLens on Shopify <span aria-hidden="true">&rarr;</span></a><a href="/guides">Explore more guides</a></div></div></section>
+    <section class="guide-final-cta"><div class="shell guide-final-cta__inner"><div><p class="eyebrow">Manual variant image control</p><h2>Show customers the images that match their selection.</h2><p>VariantLens gives Shopify merchants manual control over which product images appear for each variant.</p></div><div class="guide-final-cta__actions"><a class="button" href="https://apps.shopify.com/variantlens">View VariantLens on Shopify <span aria-hidden="true">&rarr;</span></a><a href="/guides/">Explore more guides</a></div></div></section>
   </div>
 </BaseLayout>
 

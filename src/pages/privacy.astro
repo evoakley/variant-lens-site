@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy | VariantLens"
+  description="Read the VariantLens privacy policy, including what Shopify store information the app accesses, how it is used, and how to contact us."
+  canonicalUrl="https://variantlens.app/privacy/"
+  robots="index,follow"
+>
+  <header class="policy-hero">
+    <div class="shell policy-hero__inner">
+      <p class="eyebrow">VariantLens legal</p>
+      <h1>Privacy Policy</h1>
+      <p>Last updated: 13 September 2026</p>
+    </div>
+  </header>
+
+  <article class="policy-section">
+    <div class="shell policy-content">
+      <section>
+        <h2>Overview</h2>
+        <p>VariantLens is a Shopify app that helps merchants assign product images to individual product variants. This privacy policy explains what information VariantLens accesses and stores, how it is used, and how it is protected.</p>
+      </section>
+
+      <section>
+        <h2>Information we access</h2>
+        <p>VariantLens accesses Shopify store information needed to provide the app. This includes shop and authorised session information provided through Shopify, as well as product data, variant data, product images and image-assignment settings created by the merchant.</p>
+        <p>VariantLens does not need customer personal data to provide its variant-image functionality and does not intentionally store customer personal data.</p>
+      </section>
+
+      <section>
+        <h2>How we use information</h2>
+        <p>We use this information only to operate VariantLens, authenticate the merchant's store, save image assignments, display the correct images for selected variants, provide support, and maintain app security and reliability.</p>
+      </section>
+
+      <section>
+        <h2>Data sharing</h2>
+        <p>We do not sell merchant data. We do not share merchant data with third parties except where required to operate the app, comply with legal obligations, or provide support.</p>
+      </section>
+
+      <section>
+        <h2>Data storage and deletion</h2>
+        <p>Variant image-assignment data and the store information needed to operate the app are stored securely and used only for app functionality. If a merchant uninstalls VariantLens, app-related data may be deleted in accordance with Shopify requirements and our internal retention practices.</p>
+        <p>VariantLens responds to Shopify's mandatory privacy webhooks for customer data requests, customer redaction and shop redaction.</p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>For privacy questions or support, email <a href="mailto:support@variantlens.app">support@variantlens.app</a>.</p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .policy-hero{padding:142px 0 78px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 82% 22%,rgba(98,112,175,.14),transparent 28%),#fff}
+  .policy-hero__inner{max-width:820px}.policy-hero h1{margin:0;font-size:clamp(2.8rem,5.4vw,4.8rem);line-height:1.02;letter-spacing:-.06em}.policy-hero__inner>p:last-child{margin:22px 0 0;color:var(--muted);font-size:1.02rem}
+  .policy-section{padding:82px 0 104px;background:#f7f7f9}.policy-content{max-width:820px}.policy-content section+section{margin-top:44px;padding-top:40px;border-top:1px solid var(--line)}.policy-content h2{margin:0 0 16px;font-size:clamp(1.55rem,2.5vw,2.15rem);line-height:1.15;letter-spacing:-.035em}.policy-content p{margin:0;color:var(--muted);font-size:1.04rem;line-height:1.75}.policy-content p+p{margin-top:14px}.policy-content a{color:var(--accent-dark);font-weight:700;text-underline-offset:3px}
+  @media(max-width:760px){.policy-hero{padding:105px 0 60px}.policy-section{padding:62px 0 78px}.policy-content section+section{margin-top:34px;padding-top:32px}}
+</style>

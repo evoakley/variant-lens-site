@@ -3,7 +3,7 @@ const { variant = "default" } = Astro.props;
 const headerClass = variant === "floating" ? "site-header site-header--floating" : "site-header";
 const installClass = variant === "floating" ? "button nav-install-button nav-shopify-cta" : "button nav-shopify-cta";
 ---
-<header class={headerClass}><nav class="shell nav" aria-label="Main navigation"><a class="brand" href="/" aria-label="VariantLens home"><img class="brand-mark" src="/assets/brand/variantlens-mark.png" alt="" width="1200" height="1200"/><img class="brand-wordmark" src="/assets/brand/variantlens-wordmark.png" alt="" width="394" height="128"/></a><div class="nav-links"><a class="nav-text-link" href="/pricing"><span>Pricing</span></a><a class="nav-text-link" href="/support"><span>Support</span></a><a class={installClass} href="https://apps.shopify.com/variantlens"><span>Install on Shopify</span></a></div></nav></header>
+<header class={headerClass}><nav class="shell nav" aria-label="Main navigation"><a class="brand" href="/" aria-label="VariantLens home"><img class="brand-mark" src="/assets/brand/variantlens-mark.png" alt="" width="1200" height="1200"/><img class="brand-wordmark" src="/assets/brand/variantlens-wordmark.png" alt="" width="394" height="128"/></a><div class="nav-links"><a class="nav-text-link" href="/pricing/"><span>Pricing</span></a><a class="nav-text-link" href="/support/"><span>Support</span></a><a class={installClass} href="https://apps.shopify.com/variantlens"><span>Install on Shopify</span></a></div></nav></header>
 
 <style>
   .site-header {
